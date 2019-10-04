@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Exa_103_CurrencyConverter</string>
+    <string name="EuroLabel">EUR</string>
+    <string name="usdLabel">USD</string>
+    <string name="InputHintDollar">1 US-Dollar</string>
+    <string name="InputHintEuro">1 Euro</string>
+    <string name="euro">€</string>
+    <string name="dollar">$</string>
+    <string name="output">%.2f %s are %.2f %s</string>
+</resources>
