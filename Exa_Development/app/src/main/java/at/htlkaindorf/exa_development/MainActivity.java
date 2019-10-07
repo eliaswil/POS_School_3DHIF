@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+                            implements View.OnLongClickListener {
     private Button bt1;
     private Button bt2;
     private Button bt3;
@@ -39,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
                 onButton5Click(view);
             }
         });
-//        bt2.setOnClickListener(this::onButton5Click);
+
+        // Variante 4: MainActivity implements sth
+        bt3.setOnLongClickListener(this);
+
     }
 
     // eventhandling over .xml
@@ -49,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void onButton5Click(View view){
         Toast.makeText(getApplicationContext(), "Second method for eventhandling", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        Toast.makeText(getApplicationContext(), "Long click", Toast.LENGTH_SHORT).show();
+        return true;
     }
 
 
