@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity
                             implements View.OnLongClickListener {
     private Button bt1;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        MapTest.main(null);
 
         bt1 = findViewById(R.id.bt1);
         bt2 = findViewById(R.id.bt2);
