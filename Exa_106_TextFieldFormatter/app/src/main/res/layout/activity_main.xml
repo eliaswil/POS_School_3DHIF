@@ -44,7 +44,7 @@
         android:id="@+id/cbStyleBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bold"
+        android:text="@string/cbBoldText"
         android:layout_toEndOf="@id/tvStyle"
         android:layout_below="@id/etInputText"
         android:layout_marginEnd="30dp"/>
@@ -53,9 +53,10 @@
         android:id="@+id/cbStyleItalic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bold"
+        android:layout_below="@id/etInputText"
         android:layout_toEndOf="@id/cbStyleBold"
-        android:layout_below="@id/etInputText" />
+        android:fontFamily="@font/ubuntu_light"
+        android:text="@string/cbItalicText" />
 
     <TextView
         android:id="@+id/tvSizeLabel"
@@ -108,18 +109,21 @@
             android:id="@+id/rbUbuntu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/rbUbuntuText" />
+            android:text="@string/rbUbuntuText"
+            />
 
         <RadioButton
             android:id="@+id/rbComicSans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/coming_soon"
             android:text="@string/rbComicSansText" />
 
         <RadioButton
             android:id="@+id/rbRoboto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_mono_light"
             android:text="@string/rbRobotoText" />
     </RadioGroup>
 

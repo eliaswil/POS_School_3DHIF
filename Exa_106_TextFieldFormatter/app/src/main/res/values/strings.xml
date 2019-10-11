@@ -7,6 +7,8 @@
     <string name="tvSizeValue">24</string>
     <string name="tvFontText">Font:</string>
     <string name="rbUbuntuText">Ubuntu</string>
-    <string name="rbComicSansText">ComicSans</string>
+    <string name="rbComicSansText">Comic Soon</string>
     <string name="rbRobotoText">Roboto</string>
+    <string name="cbItalicText">italic</string>
+    <string name="cbBoldText">bold</string>
 </resources>
