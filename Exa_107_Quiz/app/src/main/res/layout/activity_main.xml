@@ -1,135 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0891FF"
+    android:orientation="vertical"
     android:padding="20dp"
     tools:context=".MainActivity">
 
-    <TableRow
-        android:id="@+id/trCategory"
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hölkkkkkölkjöaksdf"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp" />
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tvCategory"
+        <TableRow
+            android:id="@+id/trQuestion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Kategorie: Sport"
-            android:textSize="20sp" />
-    </TableRow>
+            android:layout_marginBottom="10dp"
+            android:layout_weight="6">
 
-    <TableRow
-        android:id="@+id/trQuestion"
-        android:layout_weight="6"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:text=""
+                android:lines="5" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/tvQuestion"
-            android:layout_weight="1"
+        <TableRow
+            android:id="@+id/trAnswersUpper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:text="Wie viele Bugs gibt es noch? Wie viele Bugs gibt es noch? Wie viele Bugs gibt es noch?" />
-    </TableRow>
+            android:layout_weight="4">
 
-    <TableRow
-        android:id="@+id/trAnswersUpper"
-        android:layout_weight="4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btAnswer1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:text="Answer1" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_weight="1"
+            <Button
+                android:id="@+id/btAnswer2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:text="Answer2" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trAnswersLower"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Button" />
+            android:layout_marginBottom="5dp"
+            android:layout_weight="4">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_weight="1"
+            <Button
+                android:id="@+id/btAnswer3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:text="Answer3" />
+
+            <Button
+                android:id="@+id/btAnswer4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:text="Answer4" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trState"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Button" />
-    </TableRow>
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1">
 
-    <TableRow
-        android:id="@+id/trAnsersLower"
-        android:layout_weight="4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btQuestion1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/grey" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_weight="1"
+            <Button
+                android:id="@+id/btQuestion2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/grey" />
+
+            <Button
+                android:id="@+id/btQuestion3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/grey" />
+
+            <Button
+                android:id="@+id/btQuestion4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/grey" />
+
+            <Button
+                android:id="@+id/btQuestion5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/grey" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trNext"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Button" />
+            android:layout_weight="0">
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Button" />
-    </TableRow>
+            <Button
+                android:id="@+id/btContinue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#005CE0"
+                android:text="@string/btContinueText" />
 
-    <TableRow
-        android:id="@+id/trState"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        </TableRow>
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Button" />
 
-        <Button
-            android:id="@+id/button6"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Button" />
+    </TableLayout>
 
-        <Button
-            android:id="@+id/button7"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button9"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Button" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/trNext"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/button10"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Button" />
-    </TableRow>
-</TableLayout>
+</LinearLayout>
