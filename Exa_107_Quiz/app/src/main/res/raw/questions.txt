@@ -1,0 +1,20 @@
+# Category : Question : An;sw;e;rs : correctAnswer;
+
+SPORT : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 0
+SPORT : Question2 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 0
+SPORT : Question3 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 0
+SPORT : Question4 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 0
+SPORT : Question5 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 3
+
+
+NVS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 2
+NVS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 2
+NVS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 2
+NVS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 2
+NVS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 2
+
+POS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 1
+POS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 1
+POS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 1
+POS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 1
+POS : Question1 : Answer1 ; Answer2 ; Answer3 ; Answer4 : 1

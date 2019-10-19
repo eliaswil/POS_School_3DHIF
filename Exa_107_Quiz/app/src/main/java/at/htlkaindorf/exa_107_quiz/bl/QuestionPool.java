@@ -1,26 +1,31 @@
 package at.htlkaindorf.exa_107_quiz.bl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class QuestionPool {
-    private Map<QuestionPool, List<QuizQuestion>> questions;
+    private Map<Category, List<QuizQuestion>> questions;
 
-    public QuestionPool(Map<QuestionPool, List<QuizQuestion>> questions) {
-        this.questions = questions;
-    }
 
     public QuestionPool() {
     }
 
-    public Map<QuestionPool, List<QuizQuestion>> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Map<QuestionPool, List<QuizQuestion>> questions) {
+    public QuestionPool(Map<Category, List<QuizQuestion>> questions) {
         this.questions = questions;
     }
+
+    public void addQuestion(Category category, QuizQuestion quizQuestion){
+        List<QuizQuestion> quizQuestions = new ArrayList<>();
+        if(this.questions.keySet().contains(category)){
+            quizQuestions = questions.get(category);
+        }
+        quizQuestions.add(quizQuestion);
+        this.questions.put(category, quizQuestions);
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -33,5 +38,13 @@ public class QuestionPool {
     @Override
     public int hashCode() {
         return Objects.hash(questions);
+    }
+
+    public Map<Category, List<QuizQuestion>> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Map<Category, List<QuizQuestion>> questions) {
+        this.questions = questions;
     }
 }
