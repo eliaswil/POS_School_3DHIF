@@ -12,14 +12,15 @@
         android:id="@+id/tvCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hölkkkkkölkjöaksdf"
+        android:text="Kategorie: placeholder"
         android:layout_marginBottom="20dp"
         android:textSize="20sp" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:stretchColumns="*">
 
         <TableRow
             android:id="@+id/trQuestion"
@@ -33,25 +34,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/white"
-                android:text=""
-                android:lines="5" />
+                android:textColor="#000"
+                android:lines="5"
+                android:layout_span="2"/>
         </TableRow>
 
         <TableRow
             android:id="@+id/trAnswersUpper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
             android:layout_weight="4">
 
             <Button
                 android:id="@+id/btAnswer1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/dark_grey"
                 android:text="Answer1" />
@@ -60,7 +64,6 @@
                 android:id="@+id/btAnswer2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/dark_grey"
@@ -78,8 +81,8 @@
                 android:id="@+id/btAnswer3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/dark_grey"
                 android:text="Answer3" />
@@ -88,7 +91,6 @@
                 android:id="@+id/btAnswer4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/dark_grey"
