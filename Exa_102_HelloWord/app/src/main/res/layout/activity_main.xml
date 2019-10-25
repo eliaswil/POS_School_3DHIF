@@ -17,7 +17,6 @@
         android:gravity="center"
         android:padding="20dp"
         android:text="@string/Heading"
-        android:textAlignment="center"
         android:textSize="20sp" />
 
     <TextView
