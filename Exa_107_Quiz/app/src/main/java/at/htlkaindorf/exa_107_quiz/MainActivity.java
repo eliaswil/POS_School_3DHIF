@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentQuestion = -1;
 
     // ToDo: find some good questions
+    // ToDo: wenn text zu lang --> layout funktioniert nicht !!!!!!!!!!!! layout_span ????
 
 
     @Override
@@ -103,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
             changeCategory();
         }
         // get, set the question
-        int questionIndex = currentQuestion % categoryMap.size();
+        int noQuestions = questionPool.getQuestions().get(currentCategory).size();
+        int questionIndex = currentQuestion % noQuestions;
         String question = questionPool.getQuestions().get(currentCategory).get(questionIndex).getQuestion();
         tvQuestion.setText(question);
 
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     private void changeCategory(){
         // set Category
         currentCategoryIndex = (++currentCategoryIndex) % categoryMap.size();
-        String tvCategoryText = getString(R.string.tvCategoryText);
+        String tvCategoryText = getString(R.string.tvCategoryText) + " ";
         tvCategoryText += categoryMap.get(currentCategoryIndex).toString();
         tvCategory.setText(tvCategoryText);
         currentCategory = categoryMap.get(currentCategoryIndex);
@@ -168,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         // read questions from file --> QuestionPool
         while ((line = reader.readLine()) != null) {
-            String[] tokens = line.split(":");
+            String[] tokens = line.split("\\|");
             if(tokens.length < 4){
                 continue;
             }
@@ -187,6 +189,8 @@ public class MainActivity extends AppCompatActivity {
 
             QuizQuestion quizQuestion = new QuizQuestion(question, answerList, correctAnswer);
             this.questionPool.addQuestion(category, quizQuestion);
+
+            System.out.println("finished with loading questions"); // ToDo: pls remove
 
         }
     }

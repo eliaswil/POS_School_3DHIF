@@ -9,5 +9,6 @@
     <color name="green">#5FFF40</color>
     <color name="green2">#AAFF9A</color>
     <color name="red">#FF4141</color>
+    <color name="background">#4F9EE9</color>
 
 </resources>
