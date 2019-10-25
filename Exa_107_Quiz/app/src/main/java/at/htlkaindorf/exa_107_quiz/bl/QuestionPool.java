@@ -25,8 +25,6 @@ public class QuestionPool {
         this.questions.put(category, quizQuestions);
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,7 +42,4 @@ public class QuestionPool {
         return questions;
     }
 
-    public void setQuestions(Map<Category, List<QuizQuestion>> questions) {
-        this.questions = questions;
-    }
 }

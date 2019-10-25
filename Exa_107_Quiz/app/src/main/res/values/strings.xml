@@ -2,4 +2,5 @@
     <string name="app_name">Exa_107_Quiz</string>
     <string name="btContinueText">Weiter</string>
     <string name="tvCategoryText">Kategorie: </string>
+    <string name="info_message">You can click the navigation buttons below to review your answers</string>
 </resources>

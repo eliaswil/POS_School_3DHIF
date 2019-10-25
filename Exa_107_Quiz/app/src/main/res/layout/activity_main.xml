@@ -121,8 +121,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/grey"
-                android:enabled="false" />
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
 
             <Button
                 android:id="@+id/btQuestion2"
@@ -131,8 +132,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/grey"
-                android:enabled="false" />
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
 
             <Button
                 android:id="@+id/btQuestion3"
@@ -141,8 +143,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/grey"
-                android:enabled="false" />
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
 
             <Button
                 android:id="@+id/btQuestion4"
@@ -151,8 +154,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/grey"
-                android:enabled="false" />
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
 
             <Button
                 android:id="@+id/btQuestion5"
@@ -160,8 +164,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/grey"
-                android:enabled="false" />
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
         </TableRow>
 
         <TableRow

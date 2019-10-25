@@ -20,23 +20,30 @@ import java.util.List;
 import java.util.Map;
 
 import at.htlkaindorf.exa_107_quiz.bl.Category;
+import at.htlkaindorf.exa_107_quiz.bl.GivenAnswers;
 import at.htlkaindorf.exa_107_quiz.bl.QuestionPool;
 import at.htlkaindorf.exa_107_quiz.bl.QuizQuestion;
 
+/**
+ * Extra-Feature:
+ * -------------
+ *
+ * just click the navigation buttons to review your answers
+ *
+ */
 public class MainActivity extends AppCompatActivity {
     private QuestionPool questionPool;
     private TextView tvQuestion;
     private Button btContinue;
     private TextView tvCategory;
     private List<Button> btQuestions = new ArrayList<>();
-    private List<Button> btAnwers = new ArrayList<>();
+    private List<Button> btAnswers = new ArrayList<>();
     private Map<Integer, Category> categoryMap = new HashMap<>();
     private int currentCategoryIndex = -1;
     Category currentCategory;
     private int currentQuestion = -1;
-
-    // ToDo: find some good questions
-    // ToDo: wenn text zu lang --> layout funktioniert nicht !!!!!!!!!!!! layout_span ????
+    private GivenAnswers givenAnswers;
+    private boolean isCurrentQuesion = true;
 
 
     @Override
@@ -53,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
         tvQuestion = findViewById(R.id.tvQuestion);
         btContinue = findViewById(R.id.btContinue);
-        btAnwers.add((Button)findViewById(R.id.btAnswer1));
-        btAnwers.add((Button)findViewById(R.id.btAnswer2));
-        btAnwers.add((Button)findViewById(R.id.btAnswer3));
-        btAnwers.add((Button)findViewById(R.id.btAnswer4));
+        btAnswers.add((Button)findViewById(R.id.btAnswer1));
+        btAnswers.add((Button)findViewById(R.id.btAnswer2));
+        btAnswers.add((Button)findViewById(R.id.btAnswer3));
+        btAnswers.add((Button)findViewById(R.id.btAnswer4));
         tvCategory = findViewById(R.id.tvCategory);
         btQuestions.add((Button)findViewById(R.id.btQuestion1));
         btQuestions.add((Button)findViewById(R.id.btQuestion2));
@@ -64,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
         btQuestions.add((Button)findViewById(R.id.btQuestion4));
         btQuestions.add((Button)findViewById(R.id.btQuestion5));
 
-
         // onClickListener for Answer Buttons
         MyOnClickListener mcl = new MyOnClickListener();
-        for(Button btAnswer : btAnwers){
+        for(Button btAnswer : btAnswers){
             btAnswer.setOnClickListener(mcl);
         }
 
@@ -75,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         btContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isCurrentQuesion = true;
                 onDisplayQuestion();
             }
         });
@@ -90,35 +97,82 @@ public class MainActivity extends AppCompatActivity {
         changeCategory();
         onDisplayQuestion();
 
-
-
+        Toast.makeText(getApplicationContext(), getString(R.string.info_message), Toast.LENGTH_LONG).show();
     }
 
     private void onDisplayQuestion(){
-        currentQuestion++;
-        btContinue.setEnabled(false);
+        boolean currQuestionIsAnswered = (currentQuestion == givenAnswers.getAnswers().size() - 1);   // if currQuestion is answered
+        if (currQuestionIsAnswered) {
+            currentQuestion++;
+            isCurrentQuesion = true;
+        }
 
         // change Category if finished with
         if(currentQuestion >= questionPool.getQuestions().get(currentCategory).size()){
             currentQuestion = 0;
             changeCategory();
         }
-        // get, set the question
+
+        // indicate current Question
+        btQuestions.get(currentQuestion).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.currentQuestionGrey));
+
+        btContinue.setEnabled(false);
+        btQuestions.get(currentQuestion).setEnabled(true);
+
         int noQuestions = questionPool.getQuestions().get(currentCategory).size();
         int questionIndex = currentQuestion % noQuestions;
+
+        displayQuestionAndAnswers(currentCategory, questionIndex, true);
+    }
+
+    private void displayQuestionAndAnswers(Category currentCategory, int questionIndex, boolean enable){
+        // get, set the question
         String question = questionPool.getQuestions().get(currentCategory).get(questionIndex).getQuestion();
         tvQuestion.setText(question);
 
         // get, set answers
-        for(int i=0; i < btAnwers.size(); i++){
+        for(int i = 0; i < btAnswers.size(); i++){
             String answer = questionPool.getQuestions().get(currentCategory).get(questionIndex).getAnswers().get(i);
-            Button btAnswer = btAnwers.get(i);
+            Button btAnswer = btAnswers.get(i);
             btAnswer.setText(answer);
             btAnswer.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.dark_grey));
-            btAnswer.setEnabled(true);
-
+            btAnswer.setEnabled(enable);
         }
+    }
 
+    public void onDisplayAnyQuestion(View view){
+        Button clickedQuestion = (Button) view;
+        for(int i = 0; i < btQuestions.size(); i++){
+
+            // determine clicked question
+            if(btQuestions.get(i).equals(clickedQuestion)){
+
+                // check if the shown question is the current one
+                isCurrentQuesion = (i == currentQuestion);
+
+                // ... AND not answered yet
+                if(isCurrentQuesion && givenAnswers.getAnswers().size() <= i){
+                    currentQuestion--;
+                    onDisplayQuestion();
+                    return;
+                }
+
+                // get, set answers and question, but disable answer buttons
+                displayQuestionAndAnswers(currentCategory, i, false);
+
+                // color Answer buttons
+                int correctIndex = questionPool.getQuestions().get(currentCategory).get(i).getCorrectAnswer();
+                int answeredIndex = givenAnswers.getAnswers().get(i);
+                if(answeredIndex == correctIndex){ // if answered correctly
+                    btAnswers.get(correctIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green));
+                }
+                else {
+                    btAnswers.get(answeredIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.red));
+                    btAnswers.get(correctIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green2));
+                }
+                btContinue.setEnabled(true);
+            }
+        }
     }
 
     private void changeCategory(){
@@ -128,34 +182,48 @@ public class MainActivity extends AppCompatActivity {
         tvCategoryText += categoryMap.get(currentCategoryIndex).toString();
         tvCategory.setText(tvCategoryText);
         currentCategory = categoryMap.get(currentCategoryIndex);
+        isCurrentQuesion = true;
 
         // reset buttons (state)
         for(Button button : btQuestions){
-            button.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.grey));
+            button.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.light_grey));
+            button.setEnabled(false);
         }
+
+        // init Given Answers
+        givenAnswers = new GivenAnswers(currentCategoryIndex, new ArrayList<Integer>());
     }
 
     private void onAnswerClick(View view){
+
+        // don't allow allow guesses on already answered questions
+        if(!isCurrentQuesion){
+            return;
+        }
+
         int clickedIndex = -1;
         Button clickedButton = (Button) view;
 
         // get index of clicked button, disable all answer-buttons
-        for(int i = 0; i < btAnwers.size(); i++){
-            if(clickedButton.equals(btAnwers.get(i))){
+        for(int i = 0; i < btAnswers.size(); i++){
+            if(clickedButton.equals(btAnswers.get(i))){
                 clickedIndex = i;
             }
-            btAnwers.get(i).setEnabled(false);
+            btAnswers.get(i).setEnabled(false);
         }
         int correctIndex = questionPool.getQuestions().get(currentCategory).get(currentQuestion).getCorrectAnswer();
 
+        // save the answer
+        givenAnswers.addAnswer(clickedIndex);
+
         // change color of buttons according to the answer
-        if(clickedIndex == correctIndex){   // true
-            btAnwers.get(clickedIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green));
+        if(clickedIndex == correctIndex){   // answer == true
+            btAnswers.get(clickedIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green));
             btQuestions.get(currentQuestion).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green));
         }
-        else{   // false
-            btAnwers.get(clickedIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.red));
-            btAnwers.get(correctIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green2));
+        else{   // answer == false
+            btAnswers.get(clickedIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.red));
+            btAnswers.get(correctIndex).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green2));
             btQuestions.get(currentQuestion).setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.red));
         }
         btContinue.setEnabled(true);
@@ -189,9 +257,6 @@ public class MainActivity extends AppCompatActivity {
 
             QuizQuestion quizQuestion = new QuizQuestion(question, answerList, correctAnswer);
             this.questionPool.addQuestion(category, quizQuestion);
-
-            System.out.println("finished with loading questions"); // ToDo: pls remove
-
         }
     }
 
