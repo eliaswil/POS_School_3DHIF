@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
                             implements View.OnLongClickListener {
-    private Button bt1;
+//    private Button bt1;
     private Button bt2;
     private Button bt3;
     private Button bt4;
@@ -23,17 +23,17 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 //        MapTest.main(null);
 
-        bt1 = findViewById(R.id.bt1);
-        bt2 = findViewById(R.id.bt2);
-        bt3 = findViewById(R.id.bt3);
-        bt4 = findViewById(R.id.bt4);
-        bt5 = findViewById(R.id.bt5);
+//        bt1 = findViewById(R.id.bt1);
+//        bt2 = findViewById(R.id.bt2);
+//        bt3 = findViewById(R.id.bt3);
+//        bt4 = findViewById(R.id.bt4);
+//        bt5 = findViewById(R.id.bt5);
 
 
         MyClickListener mcl = new MyClickListener();
-        bt1.setOnClickListener(mcl);
-        bt2.setOnClickListener(mcl);
-        bt3.setOnClickListener(mcl);
+//        bt1.setOnClickListener(mcl);
+//        bt2.setOnClickListener(mcl);
+//        bt3.setOnClickListener(mcl);
 
         // innere anonyme Klasse
         bt5.setOnClickListener(new View.OnClickListener() {
