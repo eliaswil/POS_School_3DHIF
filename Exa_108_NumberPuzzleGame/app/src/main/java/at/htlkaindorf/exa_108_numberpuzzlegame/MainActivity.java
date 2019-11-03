@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private int direction;
     private Button touchedButton;
     private int indexOfGreyButton;
+    private Button btReset;
+    private final int N = 4; // number of buttons per row
 
 
     /**
@@ -41,6 +43,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initButtons();
+        btReset = findViewById(R.id.btReset);
+
+        btReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                direction = 0;
+                touchedButton = null;
+                indexOfGreyButton = 0;
+                gestureDetectorCompat = null;
+                btNumbers = null;
+                initButtons();
+            }
+        });
     }
 
     private void initButtons(){
@@ -70,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }
         numbers.add("");
         Collections.shuffle(numbers);
+        List<String> values = new ArrayList<>(numbers);
         int i = -1;
         for (Button btNumber : btNumbers) {
             i++;
@@ -78,12 +94,16 @@ public class MainActivity extends AppCompatActivity {
                 // grey button
                 btNumber.setBackgroundColor(getColor(R.color.grey));
                 indexOfGreyButton = i;
+                btNumber.setText("");
             }else{
                 int number = Integer.parseInt(numbers.get(0));
                 btNumber.setText(numbers.get(0));
                 if(number % 2 == 0){
                     // red
                     btNumber.setBackgroundColor(getColor(R.color.red));
+                }
+                else {
+                    btNumber.setBackgroundColor(getColor(R.color.white));
                 }
             }
             numbers.remove(0);
@@ -107,8 +127,57 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        // check if solvable
+        if(!solvable(values)){
+            Toast.makeText(getApplicationContext(), getString(R.string.not_solvable), Toast.LENGTH_SHORT).show();
+        }
+
 
     }
+    private boolean solvable(List<String> numbers){
+        int inversionCount = 0;
+
+        // get the index of the blank button
+        int indexOfBlank = 0;
+        for (int i = 0; i < numbers.size(); i++) {
+            if(numbers.get(i).equals("")){
+                indexOfBlank = i;
+                numbers.remove(i);
+            }
+        }
+
+        // convert string-list to integer-list
+        List<Integer> intList = new ArrayList<>();
+        for(String s : numbers) {
+            intList.add(Integer.valueOf(s));
+        }
+
+        // determine no inversions
+        for (int i = 1; i < intList.size(); i++) {
+            for (int j = i-1; j >= 0; j--) {
+                if(intList.get(i) < intList.get(j)){
+                    inversionCount++;
+                }
+            }
+        }
+
+        if(N % 2 == 0){
+
+            int rowIndex = (int)Math.floor(indexOfBlank / N);
+
+            // true if: rowIndex == even AND inversionCount == odd
+            if((rowIndex % 2 == 0) && (inversionCount % 2 == 1)){
+                return true;
+            }
+            // true if: rowIndex == odd AND inversionCount == even
+            return (rowIndex % 2 == 1) && (inversionCount % 2 == 1);
+
+        }else{
+            return (inversionCount % 2 == 0);
+        }
+    }
+
+
     private void swapButtons(int touchedIndex, int targetIndex){
         Button touched = btNumbers[touchedIndex];
         Button target = btNumbers[targetIndex];

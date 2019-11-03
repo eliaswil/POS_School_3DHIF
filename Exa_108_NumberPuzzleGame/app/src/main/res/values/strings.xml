@@ -2,4 +2,5 @@
     <string name="app_name">Exa_108_NumberPuzzleGame</string>
     <string name="btResetText">RESET</string>
     <string name="warning_swipe_not_allowed">Swipe not allowed:</string>
+    <string name="not_solvable">Impossible</string>
 </resources>
