@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailedActivity"
+    android:paddingTop="50dp"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
+    android:paddingBottom="30dp">
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/ivProfilePic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivProfilePic"
+        android:id="@+id/tvFirstname"
+        android:textSize="20sp"
+        android:text="Firstname:"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvFirstname"
+        android:id="@+id/tvLastname"
+        android:textSize="20sp"
+        android:text="Lastname:"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLastname"
+        android:id="@+id/tvTelephonenumber"
+        android:textSize="20sp"
+        android:text="Telephone number:"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTelephonenumber"
+        android:id="@+id/tvLanguage"
+        android:textSize="20sp"
+        android:text="Language:"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLanguage"
+        android:id="@+id/tvGender"
+        android:textSize="20sp"
+        android:text="Gender:"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvGender"
+        android:id="@+id/tvUrl"
+        android:textSize="20sp"
+        android:text="URL:"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:inputType="none"
+        android:layout_alignBaseline="@id/tvFirstname"
+        android:layout_toEndOf="@id/tvFirstname"
+        android:text="Elias"/>
+
+
+</RelativeLayout>
