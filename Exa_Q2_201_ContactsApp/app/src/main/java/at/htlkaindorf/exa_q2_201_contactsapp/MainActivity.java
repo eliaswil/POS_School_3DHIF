@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchView svSearch;
     private ContactAdapter contactAdapter;
     public static Context mainContext = new MainActivity().getApplicationContext();
+    // ToDo: Fast Scroll Bar
 
 
     @Override
