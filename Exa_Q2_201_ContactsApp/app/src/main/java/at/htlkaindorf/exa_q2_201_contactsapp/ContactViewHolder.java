@@ -3,24 +3,34 @@ package at.htlkaindorf.exa_q2_201_contactsapp;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ContactViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener{
+import at.htlkaindorf.exa_q2_201_contactsapp.bl.Contact;
+
+public class ContactViewHolder extends RecyclerView.ViewHolder{
 
     private ImageView ivPicture;
     private TextView tvName;
+    private Contact contact;
+    private LinearLayout linearLayout;
 
-    public ContactViewHolder(@NonNull View itemView, ImageView ivPicture, TextView tvName) {
+    public void setContact(Contact contact){
+        this.contact = contact;
+    }
+
+    public ContactViewHolder(@NonNull View itemView, ImageView ivPicture, TextView tvName, LinearLayout linearLayout) {
         super(itemView);
         this.ivPicture = ivPicture;
         this.tvName = tvName;
+        this.linearLayout = linearLayout;
+        this.linearLayout.setOnClickListener(this::onClickContact);
     }
 
-
+    public LinearLayout getLinearLayout(){ return  linearLayout; }
     public ImageView getIvPicture() {
         return ivPicture;
     }
@@ -37,9 +47,9 @@ public class ContactViewHolder extends RecyclerView.ViewHolder implements Recycl
         this.tvName = tvName;
     }
 
-    @Override
-    public void onClick(View v) {
+    private void onClickContact(View v) {
         Intent intent = new Intent(MainActivity.mainContext, DetailedActivity.class);
+        intent.putExtra("contact", contact);
         MainActivity.mainContext.startActivity(intent);
     }
 }

@@ -18,70 +18,114 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ivProfilePic"
-        android:id="@+id/tvFirstname"
-        android:textSize="20sp"
-        android:text="Firstname:"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvFirstname"
-        android:id="@+id/tvLastname"
-        android:textSize="20sp"
-        android:text="Lastname:"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="20dp"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/ivProfilePic">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLastname"
-        android:id="@+id/tvTelephonenumber"
-        android:textSize="20sp"
-        android:text="Telephone number:"
-        android:layout_marginBottom="10dp"/>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvTelephonenumber"
-        android:id="@+id/tvLanguage"
-        android:textSize="20sp"
-        android:text="Language:"
-        android:layout_marginBottom="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Firstname:"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLanguage"
-        android:id="@+id/tvGender"
-        android:textSize="20sp"
-        android:text="Gender:"
-        android:layout_marginBottom="10dp"/>
+            <TextView
+                android:id="@+id/tvFirstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Elias"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvGender"
-        android:id="@+id/tvUrl"
-        android:textSize="20sp"
-        android:text="URL:"
-        android:layout_marginBottom="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lastname:"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:inputType="none"
-        android:layout_alignBaseline="@id/tvFirstname"
-        android:layout_toEndOf="@id/tvFirstname"
-        android:text="Elias"/>
+            <TextView
+                android:id="@+id/tvLastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Wilfinger"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Language:"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tvLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="German"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gender:"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="male"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone number:"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+43 000 0000 0000"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+        </TableRow>
+
+    </TableLayout>
+
 
 
 </RelativeLayout>

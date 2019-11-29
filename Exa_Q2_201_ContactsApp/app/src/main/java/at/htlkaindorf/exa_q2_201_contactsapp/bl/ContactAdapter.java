@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,15 +58,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_item, parent, false);
         ImageView ivPicture = view.findViewById(R.id.ivProfilePic);
         TextView tvName = view.findViewById(R.id.tvName);
+        LinearLayout linearLayout = view.findViewById(R.id.llParent);
 
-        ContactViewHolder contactViewHolder = new ContactViewHolder(view, ivPicture, tvName);
+        ContactViewHolder contactViewHolder = new ContactViewHolder(view, ivPicture, tvName, linearLayout);
         return contactViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         Contact contact = filteredContacts.get(position);
-        Picasso.get().load(contact.getPicture().toString()).into(holder.getIvPicture());
+        holder.setContact(contact);
+        Picasso.get().load(contact.getPicture().toString())
+                .placeholder(R.drawable.testpic)
+                .into(holder.getIvPicture());
         String name = contact.getLastname() + ", " + contact.getFirstname();
         holder.getTvName().setText(name);
     }

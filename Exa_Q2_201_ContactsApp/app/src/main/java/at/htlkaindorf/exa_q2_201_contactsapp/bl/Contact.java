@@ -1,16 +1,19 @@
 package at.htlkaindorf.exa_q2_201_contactsapp.bl;
 
-import java.io.InputStream;
+import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
-public class Contact {
+public class Contact implements Parcelable {
     private String firstname;
     private String lastname;
     private String language;
     private char gender;
-    private URL picture;
+    private Uri picture;
     private String phoneNumber;
     private int id;
 
@@ -22,13 +25,32 @@ public class Contact {
         this.lastname = tokens[2];
         this.language = tokens[3];
         this.gender = tokens[4].toUpperCase().equals("MALE") ? 'm' : 'f';
-        try {
-            this.picture = new URL(tokens[5]);
-        } catch (MalformedURLException e) {
-            this.picture = null;
-        }
+        this.picture = Uri.parse(tokens[5]);
         this.phoneNumber = tokens[6];
     }
+
+
+    protected Contact(Parcel in) {
+        firstname = in.readString();
+        lastname = in.readString();
+        language = in.readString();
+        gender = (char) in.readInt();
+        picture = in.readParcelable(Uri.class.getClassLoader());
+        phoneNumber = in.readString();
+        id = in.readInt();
+    }
+
+    public static final Creator<Contact> CREATOR = new Creator<Contact>() {
+        @Override
+        public Contact createFromParcel(Parcel in) {
+            return new Contact(in);
+        }
+
+        @Override
+        public Contact[] newArray(int size) {
+            return new Contact[size];
+        }
+    };
 
     @Override
     public boolean equals(Object o) {
@@ -81,11 +103,11 @@ public class Contact {
         this.gender = gender;
     }
 
-    public URL getPicture() {
+    public Uri getPicture() {
         return picture;
     }
 
-    public void setPicture(URL picture) {
+    public void setPicture(Uri picture) {
         this.picture = picture;
     }
 
@@ -104,4 +126,22 @@ public class Contact {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(firstname);
+        dest.writeString(lastname);
+        dest.writeString(language);
+        dest.writeInt((int) gender);
+        dest.writeParcelable(picture, flags);
+        dest.writeString(phoneNumber);
+        dest.writeInt(id);
+    }
+
 }
