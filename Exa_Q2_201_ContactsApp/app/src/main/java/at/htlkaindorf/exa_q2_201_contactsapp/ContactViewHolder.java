@@ -20,9 +20,6 @@ public class ContactViewHolder extends RecyclerView.ViewHolder{
     private Contact contact;
     private LinearLayout linearLayout;
 
-    public void setContact(Contact contact){
-        this.contact = contact;
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     public ContactViewHolder(@NonNull View itemView, ImageView ivPicture, TextView tvName, LinearLayout linearLayout) {
@@ -41,8 +38,6 @@ public class ContactViewHolder extends RecyclerView.ViewHolder{
             MainActivity.contactAdapter.currentContact = contact;
             return gdc.onTouchEvent(event);
         });
-        this.ivPicture.setOnTouchListener((v, event) -> gdc.onTouchEvent(event));
-        this.tvName.setOnTouchListener((v, event) -> gdc.onTouchEvent(event));
     }
 
     public ImageView getIvPicture() {
@@ -51,6 +46,9 @@ public class ContactViewHolder extends RecyclerView.ViewHolder{
     public TextView getTvName() {
         return tvName;
     }
+    public void setContact(Contact contact){
+        this.contact = contact;
+    }
 
     private void onClickContact() {
         Intent intent = new Intent(MainActivity.mainContext, DetailedActivity.class);
@@ -58,7 +56,6 @@ public class ContactViewHolder extends RecyclerView.ViewHolder{
         MainActivity.mainContext.startActivity(intent);
     }
     private void onSwipe(){
-        System.out.println("!!!!!! onSwipe() !!!!!!!!!!!!!!!!");
         MainActivity.contactAdapter.delete();
     }
 
@@ -70,7 +67,6 @@ public class ContactViewHolder extends RecyclerView.ViewHolder{
          */
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            System.out.println("!!!!!!!!!!!!!! on Fling !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
             float deltaX = e1.getX() - e2.getX();
             float deltaXAbs = Math.abs(deltaX);
 

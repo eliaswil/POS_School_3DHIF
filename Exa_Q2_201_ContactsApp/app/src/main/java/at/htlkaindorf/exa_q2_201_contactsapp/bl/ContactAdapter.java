@@ -28,6 +28,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
     private List<Contact> contacts;
     private List<Contact> filteredContacts;
     public Contact currentContact;
+    private String currFilter;
 
     public ContactAdapter() {
         try {
@@ -46,6 +47,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
     public void filterContacts(String filter){
         filteredContacts.clear();
         filteredContacts.addAll(contacts);
+        currFilter = filter;
 
         filteredContacts.removeIf(contact -> !(contact.getFirstname().toUpperCase().contains(filter.toUpperCase())
                 || contact.getLastname().toUpperCase().contains(filter.toUpperCase())));
@@ -53,10 +55,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         notifyDataSetChanged();
     }
     public void delete(){
-
         this.contacts.remove(currentContact);
         this.filteredContacts = new ArrayList<>(contacts);
-        sortContacts();
+        filterContacts(currFilter);
         notifyDataSetChanged();
     }
 
@@ -68,8 +69,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         TextView tvName = view.findViewById(R.id.tvName);
         LinearLayout linearLayout = view.findViewById(R.id.llParent);
 
-        ContactViewHolder contactViewHolder = new ContactViewHolder(view, ivPicture, tvName, linearLayout);
-        return contactViewHolder;
+        return new ContactViewHolder(view, ivPicture, tvName, linearLayout);
     }
 
     @Override

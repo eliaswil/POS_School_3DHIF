@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_light"
-                android:text="Firstname:"
+                android:text="@string/firstname"
                 android:textColor="@color/orange"
                 android:textSize="20sp" />
 
@@ -61,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_light"
-                android:text="Lastname:"
+                android:text="@string/lastname"
                 android:textColor="@color/orange"
                 android:textSize="20sp" />
 
@@ -86,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_light"
-                android:text="Language:"
+                android:text="@string/language"
                 android:textColor="@color/orange"
                 android:textSize="20sp" />
 
@@ -111,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_light"
-                android:text="Gender:"
+                android:text="@string/gender"
                 android:textColor="@color/orange"
                 android:textSize="20sp" />
 
@@ -136,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_light"
-                android:text="Phone number:"
+                android:text="@string/phone_number"
                 android:textColor="@color/orange"
                 android:textSize="20sp" />
 

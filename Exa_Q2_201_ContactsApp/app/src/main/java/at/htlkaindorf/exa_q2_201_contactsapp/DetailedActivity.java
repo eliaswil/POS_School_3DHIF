@@ -19,9 +19,6 @@ public class DetailedActivity extends AppCompatActivity {
     private TextView tvLanguage;
     private ImageView ivPic;
 
-    // ToDo: remove hardcoded Strings from activity_detailed.xml
-    // ToDo: dark & better design for detailed .xml
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +36,7 @@ public class DetailedActivity extends AppCompatActivity {
         Contact contact = (Contact) getIntent().getExtras().get("contact");
         tvFirstName.setText(contact.getFirstname());
         tvLastName.setText(contact.getLastname());
-        tvGender.setText(Character.toString(contact.getGender()).equals("m") ? "male" : "female");  // ToDo: null pointer Exception !!!
+        tvGender.setText(Character.toString(contact.getGender()).equals("m") ? "male" : "female");
         tvPhone.setText(contact.getPhoneNumber());
         tvLanguage.setText(contact.getLanguage());
         Picasso.get().load(contact.getPicture().toString())

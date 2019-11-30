@@ -20,9 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchView svSearch;
     public static ContactAdapter contactAdapter;
     public static MainActivity mainContext;
-    // ToDo: Fast Scroll Bar
     // ToDo: Test im Emulator
-
 
 
     @Override
@@ -53,6 +51,5 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 }
