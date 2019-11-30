@@ -4,8 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Objects;
 
 public class Contact implements Parcelable {
@@ -75,56 +73,24 @@ public class Contact implements Parcelable {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
     public String getLastname() {
         return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public char getGender() {
         return gender;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
     }
 
     public Uri getPicture() {
         return picture;
     }
 
-    public void setPicture(Uri picture) {
-        this.picture = picture;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

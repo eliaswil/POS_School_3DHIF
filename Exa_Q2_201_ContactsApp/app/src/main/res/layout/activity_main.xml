@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#8B8A8A"
+        android:layout_marginBottom="5dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContacts"

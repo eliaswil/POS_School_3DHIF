@@ -20,13 +20,13 @@ public class DetailedActivity extends AppCompatActivity {
     private ImageView ivPic;
 
     // ToDo: remove hardcoded Strings from activity_detailed.xml
+    // ToDo: dark & better design for detailed .xml
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
-        Toast.makeText(getApplicationContext(), "working", Toast.LENGTH_SHORT).show();
 
         tvFirstName = findViewById(R.id.tvFirstname);
         tvLanguage = findViewById(R.id.tvLanguage);

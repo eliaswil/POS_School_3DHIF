@@ -10,12 +10,18 @@ import android.os.Bundle;
 import at.htlkaindorf.exa_q2_201_contactsapp.bl.ContactAdapter;
 import at.htlkaindorf.exa_q2_201_contactsapp.io.IOHandler;
 
+
+/**
+ * bl.ContactAdapter.onBindViewHolder() --> mit placeholder: lädt etwas länger
+ */
+
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SearchView svSearch;
-    private ContactAdapter contactAdapter;
+    public static ContactAdapter contactAdapter;
     public static MainActivity mainContext;
     // ToDo: Fast Scroll Bar
+    // ToDo: Test im Emulator
 
 
 
@@ -23,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mainContext = this;
 
         IOHandler.init(this.getApplicationContext());
