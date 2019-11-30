@@ -36,12 +36,7 @@ public class MainActivity extends AppCompatActivity
 //        bt3.setOnClickListener(mcl);
 
         // innere anonyme Klasse
-        bt5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onButton5Click(view);
-            }
-        });
+        bt5.setOnClickListener(this::onButton5Click);
 
         // Variante 4: MainActivity implements sth
         bt3.setOnLongClickListener(this);

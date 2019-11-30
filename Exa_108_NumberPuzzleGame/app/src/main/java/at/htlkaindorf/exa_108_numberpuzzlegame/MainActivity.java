@@ -14,24 +14,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private Button[] btNumbers;
     private GestureDetectorCompat gestureDetectorCompat;
     public static final String TAG = MainActivity.class.getSimpleName();
-    private int swipedButtonIndex;
     private int direction;
     private Button touchedButton;
     private int indexOfGreyButton;
     private Button btReset;
     private final int N = 4; // number of buttons per row
-
 
     /**
      * ToDo: everything
@@ -84,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             numbers.add(Integer.toString(i));
         }
         numbers.add("");
+
         Collections.shuffle(numbers);
         List<String> values = new ArrayList<>(numbers);
         int i = -1;
@@ -110,9 +105,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
-
         // set GestureDetector (Swipe-Event)
         MyGestureListener mgl = new MyGestureListener();
         gestureDetectorCompat = new GestureDetectorCompat(this, mgl);
@@ -134,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private boolean solvable(List<String> numbers){
+    private boolean solvable(List<String> numbers){ // ToDO: geht noch nicht ganz
         int inversionCount = 0;
 
         // get the index of the blank button
@@ -202,10 +194,10 @@ public class MainActivity extends AppCompatActivity {
                 touchedIndex = i;
                 targetIndex = touchedIndex + direction;
 
-                allowed = !(touchedIndex % 4 == 0 && direction == -1) && allowed; // left
-                allowed = !(touchedIndex % 4 == 3 && direction == 1) && allowed; // right
-                allowed = !(touchedIndex <=3 && direction == -4) && allowed; // up
-                allowed = !(touchedIndex >= 12 && direction == 4) && allowed; // down
+                allowed = !(touchedIndex % N == 0 && direction == -1) && allowed; // left
+                allowed = !(touchedIndex % N == 3 && direction == 1) && allowed; // right
+                allowed = !(touchedIndex <= N-1 && direction == -N) && allowed; // up
+                allowed = !(touchedIndex >= 3*N && direction == N) && allowed; // down
                 if(allowed){
                     Button targetButton = btNumbers[targetIndex];
                     allowed = targetButton.equals(btNumbers[indexOfGreyButton]);
