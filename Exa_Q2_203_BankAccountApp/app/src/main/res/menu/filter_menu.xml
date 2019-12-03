@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/miStudent"
-        android:title="Student" />
-    <item
         android:id="@+id/miGiro"
-        android:title="Giro" />
+        android:title="@string/giro_account" />
+    <item
+        android:id="@+id/miStudent"
+        android:title="@string/student_account" />
+
 </menu>
