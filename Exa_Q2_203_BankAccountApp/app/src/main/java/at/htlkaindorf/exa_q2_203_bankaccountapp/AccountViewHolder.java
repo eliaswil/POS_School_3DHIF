@@ -13,13 +13,15 @@ public class AccountViewHolder extends RecyclerView.ViewHolder {
     private ImageView ivIcon;
     private TextView tvIban;
     private TextView tvAvailableAmount;
+    private TextView tvAmount;
     private Account account;
 
-    public AccountViewHolder(@NonNull View itemView, ImageView ivIcon, TextView tvIban, TextView tvAvailableAmount) {
+    public AccountViewHolder(@NonNull View itemView, ImageView ivIcon, TextView tvIban, TextView tvAvailableAmount, TextView tvAmount) {
         super(itemView);
         this.ivIcon = ivIcon;
         this.tvIban = tvIban;
         this.tvAvailableAmount = tvAvailableAmount;
+        this.tvAmount = tvAmount;
     }
 
     public void setAccount(Account account) {
@@ -36,6 +38,14 @@ public class AccountViewHolder extends RecyclerView.ViewHolder {
 
     public TextView getTvIban() {
         return tvIban;
+    }
+
+    public TextView getTvAmount() {
+        return tvAmount;
+    }
+
+    public void setTvAmount(TextView tvAmount) {
+        this.tvAmount = tvAmount;
     }
 
     public void setTvIban(TextView tvIban) {
