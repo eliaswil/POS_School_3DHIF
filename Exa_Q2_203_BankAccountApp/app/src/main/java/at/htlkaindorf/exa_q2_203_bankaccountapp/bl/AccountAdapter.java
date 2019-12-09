@@ -45,15 +45,20 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
         filteredAccounts.sort(Comparator.comparing(Account::getIban));
     }
     private void transferMoney(Account fromAccount, String toIban, double amount){
-        Account toAccount;
-        for (Account account : accounts) {
-            if(account.getIban().equals(toIban)){
-                toAccount = account;
+        for (Account toAccount : accounts) {
+            if(toAccount.getIban().equals(toIban)){
+                // get fromAccount of list
+                for (Account fromAccountOfList : accounts) {
+                    if(fromAccount.equals(fromAccountOfList)){
+                        double fromBalance = fromAccountOfList.getBalance();
+                        if(fromBalance >= amount){
+                            fromAccountOfList.setBalance(fromBalance - amount);
+                            toAccount.setBalance(toAccount.getBalance() + amount);
+                        }
+                    }
+                }
             }
         }
-
-        // ToDo: transfer
-
     }
 
 
