@@ -1,8 +1,11 @@
 package at.htlkaindorf.exa_q2_203_bankaccountapp.bl;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Objects;
 
-public class Account {
+public class Account implements Parcelable {
     private String iban;
     private double balance;
     private float interest;
@@ -12,6 +15,24 @@ public class Account {
         this.balance = balance;
         this.interest = interest;
     }
+
+    protected Account(Parcel in) {
+        iban = in.readString();
+        balance = in.readDouble();
+        interest = in.readFloat();
+    }
+
+    public static final Creator<Account> CREATOR = new Creator<Account>() {
+        @Override
+        public Account createFromParcel(Parcel in) {
+            return new Account(in);
+        }
+
+        @Override
+        public Account[] newArray(int size) {
+            return new Account[size];
+        }
+    };
 
     @Override
     public boolean equals(Object o) {
@@ -31,25 +52,11 @@ public class Account {
     public String getIban() {
         return iban;
     }
-
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-
     public double getBalance() {
         return balance;
     }
-
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    public float getInterest() {
-        return interest;
-    }
-
-    public void setInterest(float interest) {
-        this.interest = interest;
     }
 
     @Override
@@ -59,5 +66,17 @@ public class Account {
                 ", balance=" + balance +
                 ", interest=" + interest +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(iban);
+        dest.writeDouble(balance);
+        dest.writeFloat(interest);
     }
 }

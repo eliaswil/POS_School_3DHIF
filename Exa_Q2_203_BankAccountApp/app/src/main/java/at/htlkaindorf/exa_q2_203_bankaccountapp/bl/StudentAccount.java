@@ -1,5 +1,7 @@
 package at.htlkaindorf.exa_q2_203_bankaccountapp.bl;
 
+import android.os.Parcel;
+
 import java.util.Objects;
 
 public class StudentAccount extends Account{
@@ -10,19 +12,16 @@ public class StudentAccount extends Account{
         this.debitCard = debitCard;
     }
 
+    protected StudentAccount(Parcel in){
+        super(in);
+        debitCard = in.readByte() != 0;
+    }
+
     @Override
     public String toString() {
         return "StudentAccount{" +
                 "debitCard=" + debitCard +
                 '}';
-    }
-
-    public boolean isDebitCard() {
-        return debitCard;
-    }
-
-    public void setDebitCard(boolean debitCard) {
-        this.debitCard = debitCard;
     }
 
     @Override
@@ -37,5 +36,31 @@ public class StudentAccount extends Account{
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), debitCard);
+    }
+
+
+
+
+    public static final Creator<StudentAccount> CREATOR = new Creator<StudentAccount>() {
+        @Override
+        public StudentAccount createFromParcel(Parcel in) {
+            return new StudentAccount(in);
+        }
+
+        @Override
+        public StudentAccount[] newArray(int size) {
+            return new StudentAccount[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeByte((byte) (debitCard ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

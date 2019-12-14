@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
+    android:id="@+id/rlContainer"
     android:paddingEnd="30dp"
+    android:layout_marginBottom="20dp"
     android:background="@drawable/rounded_item">
 
     <ImageView
         android:id="@+id/ivIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp" />
 
     <TextView
@@ -19,21 +21,32 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvHeading"
         android:textColor="#00B1FF"
-        android:text="Giro-Account"
-        android:textSize="30dp"
+        android:text="@string/giro_account"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:layout_toEndOf="@id/ivIcon"
         android:layout_marginBottom="5dp"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/iban"
+        android:id="@+id/tvIbanLabel"
+        android:textColor="#949494"
+        android:textSize="15sp"
+        android:layout_below="@id/tvHeading"
+        android:layout_toEndOf="@id/ivIcon"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"/>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvIban"
-        android:text="IBAN: ATxx-xxxx-xxxx-xxxx-xxxx"
+        android:text="ATxx-xxxx-xxxx-xxxx-xxxx"
         android:textColor="#949494"
-        android:textSize="20dp"
+        android:textSize="15sp"
         android:layout_below="@id/tvHeading"
-        android:layout_toEndOf="@id/ivIcon"
+        android:layout_toEndOf="@+id/tvIbanLabel"
         android:layout_marginBottom="10dp"
         android:gravity="end"/>
 
@@ -42,7 +55,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvAmount"
         android:text="€ 16 800,20"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_below="@id/tvIban"
         android:textColor="#31B629"
         android:textStyle="bold"
@@ -62,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/available"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:id="@+id/tvAvailable"
         android:layout_toEndOf="@id/ivIcon"
         android:layout_below="@id/tvLine" />
@@ -75,6 +88,6 @@
         android:layout_below="@id/tvLine"
         android:gravity="end"
         android:layout_toEndOf="@id/tvAvailable"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
 </RelativeLayout>

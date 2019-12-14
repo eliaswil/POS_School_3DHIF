@@ -2,7 +2,6 @@ package at.htlkaindorf.exa_q2_203_bankaccountapp.io;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.widget.GridLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,18 +18,25 @@ public class IO_Access {
     public static void init(Context context){
         mainContext = context;
     }
+
     public static List<Account> loadAccounts() throws IOException {
         List<Account> accounts = new ArrayList<>();
         AssetManager assetManager = mainContext.getAssets();
         InputStream is = assetManager.open("account_data.csv");
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line = "";
+        br.readLine();
         while ((line = br.readLine()) != null){
             String[] tokens = line.split(",");
+            String iban = tokens[2];
+            double amount = Double.parseDouble(tokens[3]);
+            float interest = Float.parseFloat(tokens[6]);
             if(tokens[1].toUpperCase().equals("GIRO")){
-                accounts.add(new GiroAccount(tokens[2], Double.parseDouble(tokens[3]), Float.parseFloat(tokens[6]), Double.parseDouble(tokens[4])));
+                double overdraft = Double.parseDouble(tokens[4]);
+                accounts.add(new GiroAccount(iban, amount, interest, overdraft));
             }else {
-                accounts.add(new StudentAccount(tokens[2], Double.parseDouble(tokens[3]), Float.parseFloat(tokens[6]), Boolean.valueOf(tokens[5])));
+                boolean debitcard = Boolean.valueOf(tokens[5]);
+                accounts.add(new StudentAccount(iban, amount, interest, debitcard));
             }
         }
         return accounts;

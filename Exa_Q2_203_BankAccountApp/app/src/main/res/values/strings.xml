@@ -4,9 +4,12 @@
     <string name="giro_account">Giro-Account</string>
     <string name="student_account">Student-Account</string>
     <string name="transaction">Transaction</string>
-    <string name="iban">IBAN:</string>
     <string name="please_enter_iban">please enter IBAN</string>
     <string name="amount">Amount:</string>
     <string name="transfer_now">TRANSFER NOW</string>
     <string name="title_activity_transfer">TransferActivity</string>
+    <string name="iban">IBAN:</string>
+    <string name="all">All Accounts</string>
+    <string name="giro_accounts">Giro Accounts</string>
+    <string name="student_accounts">Student Accounts</string>
 </resources>

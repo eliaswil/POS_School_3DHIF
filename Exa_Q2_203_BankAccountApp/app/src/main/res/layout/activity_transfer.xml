@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:text="€ 5 100,70"
             android:textSize="30sp"
+            android:id="@+id/tvFromBalance"
             android:textColor="@color/green"
             android:textStyle="bold"
             android:gravity="end"
@@ -66,12 +67,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/available"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="€ 8000,00"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:id="@+id/tvAvailableAmount"
                 android:gravity="end"/>
 
@@ -122,6 +123,7 @@
                 android:textSize="15sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:gravity="end"
                 android:id="@+id/actvIban"
                 android:layout_weight="50"/>
@@ -138,10 +140,13 @@
                 android:textStyle="bold"/>
 
             <EditText
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:inputType="numberDecimal"
                 android:id="@+id/edToAmount"
                 android:layout_weight="50"/>
 
