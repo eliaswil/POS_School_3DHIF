@@ -5,7 +5,6 @@ import androidx.core.view.GestureDetectorCompat;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void onSwipe(){
         // ToDo: implement Swipe event
+
+
+
     }
 
     private boolean onTouch(View v, MotionEvent event) {
