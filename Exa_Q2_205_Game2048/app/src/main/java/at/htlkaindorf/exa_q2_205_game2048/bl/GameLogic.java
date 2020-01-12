@@ -2,12 +2,13 @@ package at.htlkaindorf.exa_q2_205_game2048.bl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class GameLogic {
     private int[] values;
-    private int[] directions = {1,-4,-1,4};
     private final int N;
     private List<Integer> free = new ArrayList<>(); // list of free positions
     private int points;
@@ -28,14 +29,20 @@ public class GameLogic {
         }
 
         Arrays.fill(values, 0);
+        values[0] = 2;
+        values[1] = 4;
         values[2] = 4;
-        values[7] = 4;
+        values[3] = 8;
+        values[4] = 2;
+        values[5] = 2;
         values[8] = 2;
-        values[13] = 2;
-        values[15] = 2;
-
+        values[9] = 2;
+        values[10] = 4;
+        values[12] = 4;
+        values[13] = 4;
+        values[14] = 8;
         gl.prettyPrint();
-        gl.makeMove(1);
+        gl.makeMove(4);
         gl.prettyPrint();
 
     }
@@ -63,7 +70,6 @@ public class GameLogic {
 
         // step 1: nach [direction] aufrücken
         for (int i = startValue; i != endValue; i += (int)(direction * (-1) * subdir)) {
-            //int jStartIndex = i + ((direction * (-1) + N-1) % (N-1)); //+ (int)(Math.pow(0.0, multiplier[(direction + 2*multiplier.length) % multiplier.length]));
             for (int j = i; j != (i - (N-1)*direction); j -= direction) {
                 // if elements davor sind frei: move
                 move(direction, j, i);
@@ -73,20 +79,33 @@ public class GameLogic {
         prettyPrint();
 
         // addieren
-        int[] startJ = {N, N, 0};
-        for (int i = 0; Math.abs(i) < N*N; i += subdir) {
-            int jStartIndex = i + startJ[(direction + 2*startJ.length) % startJ.length];
-            for (int j = jStartIndex; j != startJ[(direction + 1 + 2*startJ.length) % startJ.length]-direction - i; j -= direction) {
-                if(values[j] == values[j - direction]){
-                    values[j] *= 2;
-                    values[j + direction] = 0;
-                    move(direction, j, jStartIndex);
+        Map<Integer, Integer> startv = new HashMap<>();
+        startv.put(-1, 0);
+        startv.put(1, N*N-1);
+        startv.put(-4, N*N-N);
+        startv.put(4, N-1);
+        Map<Integer, Integer> endv = new HashMap<>();
+        endv.put(-1, 16);
+        endv.put(1, -1);
+        endv.put(-4, 16);
+        endv.put(4, -1);
+        int[] startJ = {0, 0, N*N-1};
+        startValue = startJ[(direction * (-1) + 2*3) % 3];
+        endValue = startValue + (int)(direction * (-1) * subdir) * N;
+        for (int i = startValue; i != endValue; i += (int)(direction * (-1) * subdir)) { // ToDo: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            for (int j = i; j != i - (N-1) * direction; j -= direction) {
+                if(j < N*N && j >= 0 && j-direction >= 0 && j-direction < N*N){
+                    if(values[j] == values[j - direction] && values[j] != 0){
+                        values[j] *= 2;
+                        values[j - direction] = 0; // ToDo: free aktualisieren ??!
+                        // alle danach aufrücken
+                        for(int k = j - 2*direction; k != i - N*direction; k -= direction){
+                            move(direction, k, i);
+                        }
+                    }
                 }
             }
         }
-
-        // ToDo: does it work ?? please test !! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     }
 
     private void move(int direction, int k, int jStartIndex){
