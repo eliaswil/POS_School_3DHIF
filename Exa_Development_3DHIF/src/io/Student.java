@@ -1,11 +1,13 @@
-package serial;
+package io;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Student {
+public class Student implements Serializable {
     private String firstname;
     private String lastname;
     private LocalDate dataOfBirth;
+    private static final long serialVersionUID = 1223423L;
 
     public Student(String firstname, String lastname, LocalDate dataOfBirth) {
         this.firstname = firstname;
