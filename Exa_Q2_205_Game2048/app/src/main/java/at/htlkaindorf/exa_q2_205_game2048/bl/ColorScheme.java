@@ -24,4 +24,16 @@ public enum ColorScheme {
     private int value;
     private int backgroundColor;
     private int fontColor;
+
+    public int getValue() {
+        return value;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public int getFontColor() {
+        return fontColor;
+    }
 }

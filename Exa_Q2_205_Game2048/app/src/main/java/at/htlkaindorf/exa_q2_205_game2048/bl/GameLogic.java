@@ -11,7 +11,7 @@ public class GameLogic {
     private int[] values;
     private final int N;
     private List<Integer> free = new ArrayList<>(); // list of free positions
-    private int points;
+    private int points = 0;
     private static final Random RAND = new Random();
 
     public GameLogic(int[] values, int points) {
@@ -92,7 +92,7 @@ public class GameLogic {
         int[] startJ = {0, 0, N*N-1};
         startValue = startJ[(direction * (-1) + 2*3) % 3];
         endValue = startValue + (int)(direction * (-1) * subdir) * N;
-        for (int i = startValue; i != endValue; i += (int)(direction * (-1) * subdir)) { // ToDo: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        for (int i = startValue; i != endValue; i += (int)(direction * (-1) * subdir)) {
             for (int j = i; j != i - (N-1) * direction; j -= direction) {
                 if(j < N*N && j >= 0 && j-direction >= 0 && j-direction < N*N){
                     if(values[j] == values[j - direction] && values[j] != 0){
@@ -106,6 +106,14 @@ public class GameLogic {
                 }
             }
         }
+
+        getFreeValues();
+        if(free.size() == 0){
+            // no move possible if .....
+        }
+
+
+
     }
 
     private void move(int direction, int k, int jStartIndex){
@@ -137,12 +145,21 @@ public class GameLogic {
     public void setNewValue(){
         int[] possibleValues = {2, 2, 4};
         int index = RAND.nextInt(possibleValues.length);
+        getFreeValues();
         if(free.size() > 0){
             int position = RAND.nextInt(free.size());
             values[free.get(position)] = possibleValues[index];
             free.remove(position);
         }else{
             System.out.println("!!!!!!!!!!!!!!! Alles Voll !!!!!!!!!!!!!!"); // sollte nie kommen !!
+        }
+    }
+    private void getFreeValues(){
+        free.clear();
+        for (int i = 0; i < values.length; i++) {
+            if(values[i] == 0){
+                free.add(i);
+            }
         }
     }
 
@@ -157,6 +174,11 @@ public class GameLogic {
     }
 
     public int getPoints() {
+        // points
+        points = 0;
+        for (int i = 0; i < values.length; i++) {
+            points += values[i];
+        }
         return points;
     }
 
