@@ -10,8 +10,10 @@ public class Cat extends Pet {
     private Uri pictureUri;
 
 
-    public Cat(String name, LocalDate dateOfBirth, Gender gender) {
+    public Cat(String name, LocalDate dateOfBirth, Gender gender, CatColor color, Uri pictureUri) {
         super(name, dateOfBirth, gender);
+        this.color = color;
+        this.pictureUri = pictureUri;
     }
 
     public CatColor getColor() {
