@@ -3,7 +3,8 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:background="#4AF9FF"
     android:id="@+id/rlItem"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:layout_marginBottom="10dp">
 
     <ImageView
         android:id="@+id/ivPicture"

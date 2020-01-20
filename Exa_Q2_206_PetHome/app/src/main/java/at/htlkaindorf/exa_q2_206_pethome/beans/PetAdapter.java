@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 
-import at.htlkaindorf.exa_q2_206_pethome.MainActivity;
 import at.htlkaindorf.exa_q2_206_pethome.PetHolder;
 import at.htlkaindorf.exa_q2_206_pethome.R;
 
 public class PetAdapter extends RecyclerView.Adapter<PetHolder> {
-    private List<Pet> pets;
     private List<Pet> filteredPets;
+
+    public void init(List<Pet> pets){
+        filteredPets = pets;
+    }
+
 
     @NonNull
     @Override
@@ -40,16 +43,15 @@ public class PetAdapter extends RecyclerView.Adapter<PetHolder> {
     public void onBindViewHolder(@NonNull PetHolder holder, int position) {
         Pet pet = filteredPets.get(position);
         holder.getIvGender().setImageResource(pet.getGender().equals(Gender.FEMALE) ? R.drawable.ic_female : R.drawable.ic_male);
-        Picasso.get().load(pet instanceof Cat
-                ? ((Cat)pet).getPictureUri().toString()
-                : Paths.get(System.getProperty("user.dir"), "app", "src", "main", "res", "drawable", "ic_dog.xml").toUri().toString())
-                .into(holder.getIvPicture());
-        holder.getTvBirthdate().setText(pet.getDateOfBirth().toString()); // ToDo: format Date
+        holder.getTvBirthdate().setText(pet.getDateOfBirth().toString());
         if(pet instanceof Dog){
             holder.getTvSize().setText("Size: " + ((Dog)pet).getSize());
+            holder.getIvPicture().setImageResource(R.drawable.ic_dog);
         }else{
             holder.getTvSize().setText("Color: " + ((Cat)pet).getColor().toString());
+            Picasso.get().load(((Cat)pet).getPictureUri()).into(holder.getIvPicture());
         }
+        holder.getTvName().setText(pet.getName());
     }
 
     @Override
