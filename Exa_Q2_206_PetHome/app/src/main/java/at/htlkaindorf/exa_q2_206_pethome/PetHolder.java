@@ -26,51 +26,23 @@ public class PetHolder extends RecyclerView.ViewHolder {
         this.tvSize = tvSize;
     }
 
-    public RelativeLayout getRelativeLayout() {
-        return relativeLayout;
-    }
-
-    public void setRelativeLayout(RelativeLayout relativeLayout) {
-        this.relativeLayout = relativeLayout;
-    }
-
-    public ImageView getIvPicture() {
+     public ImageView getIvPicture() {
         return ivPicture;
-    }
-
-    public void setIvPicture(ImageView ivPicture) {
-        this.ivPicture = ivPicture;
     }
 
     public TextView getTvName() {
         return tvName;
     }
 
-    public void setTvName(TextView tvName) {
-        this.tvName = tvName;
-    }
-
     public ImageView getIvGender() {
         return ivGender;
-    }
-
-    public void setIvGender(ImageView ivGender) {
-        this.ivGender = ivGender;
     }
 
     public TextView getTvBirthdate() {
         return tvBirthdate;
     }
 
-    public void setTvBirthdate(TextView tvBirthdate) {
-        this.tvBirthdate = tvBirthdate;
-    }
-
     public TextView getTvSize() {
         return tvSize;
-    }
-
-    public void setTvSize(TextView tvSize) {
-        this.tvSize = tvSize;
     }
 }

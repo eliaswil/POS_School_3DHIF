@@ -36,10 +36,5 @@ public class PetListActivity extends AppCompatActivity {
         tvHeading.setText(type.equals("cats")
                 ? "Cat list"
                 : "Dog list" );
-
-
-
-
-
     }
 }

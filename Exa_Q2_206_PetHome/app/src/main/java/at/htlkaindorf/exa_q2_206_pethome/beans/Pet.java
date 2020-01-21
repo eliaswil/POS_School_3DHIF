@@ -17,10 +17,6 @@ public class Pet implements Serializable {
         this.gender = gender;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public String getName() {
         return name;
     }

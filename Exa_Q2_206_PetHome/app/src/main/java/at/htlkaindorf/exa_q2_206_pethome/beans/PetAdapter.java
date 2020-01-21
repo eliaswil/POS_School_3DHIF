@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.Comparator;
 import java.util.List;
 
 import at.htlkaindorf.exa_q2_206_pethome.PetHolder;

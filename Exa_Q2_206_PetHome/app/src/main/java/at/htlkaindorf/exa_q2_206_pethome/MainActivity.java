@@ -21,9 +21,6 @@ import at.htlkaindorf.exa_q2_206_pethome.io.IO_Helper;
 
 public class MainActivity extends AppCompatActivity {
     public static Context mainContext;
-    private PetAdapter petAdapter;
-    private ImageView ivCats;
-    private ImageView ivDogs;
     private List<Pet> pets;
 
     @Override
@@ -32,10 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mainContext = this.getApplicationContext();
 
-        petAdapter = new PetAdapter();
-
-        ivCats = findViewById(R.id.ivCats);
-        ivDogs = findViewById(R.id.ivDogs);
+        ImageView ivCats = findViewById(R.id.ivCats);
+        ImageView ivDogs = findViewById(R.id.ivDogs);
 
         ivDogs.setOnClickListener(v -> onDogs());
         ivCats.setOnClickListener(v -> onCats());
@@ -45,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void onDogs(){
