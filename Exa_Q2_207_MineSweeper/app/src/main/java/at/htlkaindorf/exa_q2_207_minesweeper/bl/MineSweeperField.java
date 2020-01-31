@@ -1,18 +1,19 @@
 package at.htlkaindorf.exa_q2_207_minesweeper.bl;
 
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class MineSweeperField { // one single field
     protected List<Integer[]> neighbours;
+    protected List<Integer[]> neighboursingMines;
     private boolean tagged;
     private boolean revealed;
     private boolean isMine;
 
-    public MineSweeperField(List<Integer[]> neighbours, boolean tagged, boolean revealed, boolean isMine) {
+    public MineSweeperField(List<Integer[]> neighbours, List<Integer[]> neighboursingMines, boolean tagged, boolean revealed, boolean isMine) {
         this.neighbours = neighbours;
+        this.neighboursingMines = neighboursingMines;
         this.tagged = tagged;
         this.revealed = revealed;
         this.isMine = isMine;
@@ -24,6 +25,14 @@ public class MineSweeperField { // one single field
 
     public void setNeighbours(List<Integer[]> neighbours) {
         this.neighbours = neighbours;
+    }
+
+    public List<Integer[]> getNeighboursingMines() {
+        return neighboursingMines;
+    }
+
+    public void setNeighboursingMines(List<Integer[]> neighboursingMines) {
+        this.neighboursingMines = neighboursingMines;
     }
 
     public boolean isTagged() {
@@ -58,12 +67,13 @@ public class MineSweeperField { // one single field
         return tagged == that.tagged &&
                 revealed == that.revealed &&
                 isMine == that.isMine &&
-                Objects.equals(neighbours, that.neighbours);
+                Objects.equals(neighbours, that.neighbours) &&
+                Objects.equals(neighboursingMines, that.neighboursingMines);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(neighbours, tagged, revealed, isMine);
+        return Objects.hash(neighbours, neighboursingMines, tagged, revealed, isMine);
     }
 
     @Override
@@ -72,10 +82,16 @@ public class MineSweeperField { // one single field
         for (Integer[] neighbour : neighbours) {
             nbs += "[" + neighbour[0] + "," + neighbour[1] + "}";
         }
+        String nbm = "{";
+        for (Integer[] neighboursingMine : neighboursingMines) {
+            nbm += "[" + neighboursingMine[0] + "," + neighboursingMine[1] + "}";
+        }
         nbs += "}";
+        nbm += "}";
         return "MineSweeperField{" +
                 "neighbours=" + nbs +
-                ", tagged=" + tagged +
+                ",\t neighboursingMines=" + nbm +
+                ",\t tagged=" + tagged +
                 ", revealed=" + revealed +
                 ", isMine=" + isMine +
                 '}';

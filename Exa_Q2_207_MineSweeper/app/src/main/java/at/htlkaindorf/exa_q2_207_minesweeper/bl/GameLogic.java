@@ -37,7 +37,7 @@ public class GameLogic {
         // fill field
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++) {
-                mineSweeperFields[i][j] = new MineSweeperField(null, false, false, false);
+                mineSweeperFields[i][j] = new MineSweeperField(null, null, false, false, false);
             }
         }
 
@@ -46,16 +46,8 @@ public class GameLogic {
 //            mineSweeperFields[listOfPositions[i][0]][listOfPositions[i][1]].setMine(true);
 //        }
 
-        mineSweeperFields[0][2].setMine(true); // ToDo: set mines in new field
-        mineSweeperFields[0][3].setMine(true);
-        mineSweeperFields[0][4].setMine(true);
-        mineSweeperFields[1][1].setMine(true);
-        mineSweeperFields[2][0].setMine(true);
-        mineSweeperFields[2][1].setMine(true);
-        mineSweeperFields[3][2].setMine(true);
-        mineSweeperFields[3][4].setMine(true);
-        mineSweeperFields[4][2].setMine(true);
-        mineSweeperFields[4][4].setMine(true);
+        mineSweeperFields[3][1].setMine(true); // ToDo: set mines in new field
+        mineSweeperFields[3][0].setMine(true);
 
         // set Neighbours
         for (int i = 0; i < fieldSize; i++) {
@@ -65,35 +57,60 @@ public class GameLogic {
             }
         }
 
-
-        for (int i = 0; i < fieldSize; i++) {
-            for (int j = 0; j < fieldSize; j++) {
-                System.out.println(i + "," + j + ": " + mineSweeperFields[i][j]);
-            }
-        }
-
-
     }
-
     private void setNeighbours(int[] pos){
         int[] velocity = {-1, 0, 1};
+        List<Integer[]> neighbouringMines = new ArrayList<>();
         List<Integer[]> neighbours = new ArrayList<>();
-
         for (int i = 0; i < velocity.length; i++) {
             for (int j = 0; j < velocity.length; j++) {
                 int[] position = {pos[0] + velocity[i], pos[1] + velocity[j]};
                 if(position[0] >= 0 && position[1] >= 0 && position[0] < fieldSize && position[1] < fieldSize
                         && (position[0] != pos[0] || position[1] != pos[1])){
+                    Integer[] helpPos = {position[0], position[1]};
                     if(mineSweeperFields[position[0]][position[1]].isMine()){
-                        Integer[] helpPos = {position[0], position[1]};
-                        neighbours.add(helpPos);
+                        neighbouringMines.add(helpPos);
                     }
+                    neighbours.add(helpPos);
                 }
             }
         }
         mineSweeperFields[pos[0]][pos[1]].setNeighbours(neighbours);
+        mineSweeperFields[pos[0]][pos[1]].setNeighboursingMines(neighbouringMines);
     }
 
+    /**
+     *
+     * @param pos ... position of clicked field
+     * @return -1 if isMine; -2 if tagged; or the number of neighbours
+     */
+    private int makeMove(int[] pos, boolean tagged){
+        if(tagged){
+            this.noTaggedMines++;
+            mineSweeperFields[pos[0]][pos[1]].setTagged(true);
+            return -2;
+        }
+        if(mineSweeperFields[pos[0]][pos[1]].isMine()){
+            // reveal all mines ?!
+            return -1;
+        }
+
+        // if no_neighbours == 0 --> makeMove for each neighbours with 0 neighbours
+        List<Integer[]> neighbouringMines = mineSweeperFields[pos[0]][pos[1]].getNeighboursingMines();
+        List<Integer[]> neighbours = mineSweeperFields[pos[0]][pos[1]].getNeighbours();
+        if(neighbouringMines.size() == 0){
+            mineSweeperFields[pos[0]][pos[1]].setRevealed(true);
+            neighbours.forEach(n -> {
+                int[] position = {n[0], n[1]};
+                if(!mineSweeperFields[position[0]][position[1]].isRevealed()){ // if not already revealed
+                    this.makeMove(position, mineSweeperFields[position[0]][position[1]].isTagged());
+                }
+            });
+        }
+
+
+        return neighbouringMines.size();
+    }
 
     public GameLogic(Integer[] firstPosition, int fieldSize) {
         this.noTaggedMines = 0;
@@ -101,11 +118,25 @@ public class GameLogic {
         placeMines(firstPosition);
     }
 
+    private void printField(){
+        for (int i = 0; i < fieldSize; i++) {
+            for (int j = 0; j < fieldSize; j++) {
+                System.out.println(i + "," + j + ": " + mineSweeperFields[i][j]);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        List<Integer> ints = new ArrayList<>();
-        System.out.println(ints.size());
+
         Integer[] firstPosition = {0,0};
-        GameLogic gameLogic = new GameLogic(firstPosition, 5);
-        // TODO: 27.01.2020 somewhere here in this file 
+        GameLogic gameLogic = new GameLogic(firstPosition, 4);
+        gameLogic.printField();
+
+        System.out.println("\n -----------------------------------------------------------\n\n");
+
+        int[] position = {1,3};
+        gameLogic.makeMove(position, false);
+
+        gameLogic.printField();
     }
 }
