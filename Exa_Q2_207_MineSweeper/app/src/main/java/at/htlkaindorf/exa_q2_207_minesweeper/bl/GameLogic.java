@@ -7,11 +7,13 @@ import java.util.Random;
 
 public class GameLogic {
     private MineSweeperField[][] mineSweeperFields;
+    private List<Integer[]> revealedFields = new ArrayList<>();
     private int noTaggedMines;
     private int fieldSize;
     private LocalTime startTime;
     private LocalTime endTime;
-    private static final int NO_MINES = 10;
+    public static final int NO_MINES = 10;
+    private int remainingEmptyFields;
 
     private void placeMines(Integer[] firstPosition){
         mineSweeperFields = new MineSweeperField[fieldSize][fieldSize];
@@ -24,7 +26,7 @@ public class GameLogic {
                 listOfAvailablePositions.add(pos);
             }
         }
-        listOfAvailablePositions.remove(firstPosition);
+        listOfAvailablePositions.removeIf(integers -> integers[0].equals(firstPosition[0]) && integers[1].equals(firstPosition[1]));
 
         Random rand = new Random();
         for (int i = 0; i < listOfPositions.length; i++) {
@@ -42,12 +44,12 @@ public class GameLogic {
         }
 
 //         fill mines
-//        for (int i = 0; i < listOfPositions.length; i++) {
-//            mineSweeperFields[listOfPositions[i][0]][listOfPositions[i][1]].setMine(true);
-//        }
+        for (int i = 0; i < listOfPositions.length; i++) {
+            mineSweeperFields[listOfPositions[i][0]][listOfPositions[i][1]].setMine(true);
+        }
 
-        mineSweeperFields[3][1].setMine(true); // ToDo: set mines in new field
-        mineSweeperFields[3][0].setMine(true);
+//        mineSweeperFields[3][1].setMine(true); // ToDo: set mines in new field
+//        mineSweeperFields[3][0].setMine(true);
 
         // set Neighbours
         for (int i = 0; i < fieldSize; i++) {
@@ -78,28 +80,52 @@ public class GameLogic {
         mineSweeperFields[pos[0]][pos[1]].setNeighbours(neighbours);
         mineSweeperFields[pos[0]][pos[1]].setNeighboursingMines(neighbouringMines);
     }
+    public int getNoMines(int[] pos){
+        return mineSweeperFields[pos[0]][pos[1]].getNeighboursingMines().size();
+    }
 
     /**
      *
      * @param pos ... position of clicked field
-     * @return -1 if isMine; -2 if tagged; or the number of neighbours
+     * @return -1 if isMine ; -2 if tagged now; -3 if untagged now; -4 game is won; or the number of neighbours
      */
-    private int makeMove(int[] pos, boolean tagged){
+    public int makeMove(int[] pos, boolean tagged){
         if(tagged){
-            this.noTaggedMines++;
-            mineSweeperFields[pos[0]][pos[1]].setTagged(true);
-            return -2;
+            if(mineSweeperFields[pos[0]][pos[1]].isTagged()){
+                this.noTaggedMines--;
+                mineSweeperFields[pos[0]][pos[1]].setTagged(false);
+                return -3;
+            }else{
+                this.noTaggedMines++;
+                mineSweeperFields[pos[0]][pos[1]].setTagged(true);
+                return -2;
+            }
         }
         if(mineSweeperFields[pos[0]][pos[1]].isMine()){
+            mineSweeperFields[pos[0]][pos[1]].setTagged(false);
+            mineSweeperFields[pos[0]][pos[1]].setRevealed(true);
             // reveal all mines ?!
             return -1;
+        }
+
+        if(!mineSweeperFields[pos[0]][pos[1]].isRevealed()){
+            remainingEmptyFields--;
+            mineSweeperFields[pos[0]][pos[1]].setRevealed(true);
+        }
+
+        if(remainingEmptyFields == 0){ // game finished (won)
+            return -4;
+        }
+
+        Integer[] posInteger = {pos[0], pos[1]};
+        if(!revealedFields.contains(posInteger)){
+            revealedFields.add(posInteger);
         }
 
         // if no_neighbours == 0 --> makeMove for each neighbours with 0 neighbours
         List<Integer[]> neighbouringMines = mineSweeperFields[pos[0]][pos[1]].getNeighboursingMines();
         List<Integer[]> neighbours = mineSweeperFields[pos[0]][pos[1]].getNeighbours();
         if(neighbouringMines.size() == 0){
-            mineSweeperFields[pos[0]][pos[1]].setRevealed(true);
             neighbours.forEach(n -> {
                 int[] position = {n[0], n[1]};
                 if(!mineSweeperFields[position[0]][position[1]].isRevealed()){ // if not already revealed
@@ -116,6 +142,7 @@ public class GameLogic {
         this.noTaggedMines = 0;
         this.fieldSize = fieldSize;
         placeMines(firstPosition);
+        remainingEmptyFields = fieldSize*fieldSize - NO_MINES;
     }
 
     private void printField(){
@@ -139,4 +166,17 @@ public class GameLogic {
 
         gameLogic.printField();
     }
+
+    public int getNoTaggedMines() {
+        return noTaggedMines;
+    }
+
+    public List<Integer[]> getRevealedFields(){
+        return revealedFields;
+    }
+
+    public MineSweeperField getMineSweeperField(int[] pos){
+        return mineSweeperFields[pos[0]][pos[1]];
+    }
+
 }
