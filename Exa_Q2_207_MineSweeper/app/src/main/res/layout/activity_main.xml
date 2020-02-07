@@ -40,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="00:38"
+            android:text="00:00"
+            android:id="@+id/tvTimer"
             android:textAlignment="center"
             android:textSize="20sp" />
 

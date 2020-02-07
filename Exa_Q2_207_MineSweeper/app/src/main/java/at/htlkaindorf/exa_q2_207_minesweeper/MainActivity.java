@@ -7,10 +7,13 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import at.htlkaindorf.exa_q2_207_minesweeper.bl.GameLogic;
 import at.htlkaindorf.exa_q2_207_minesweeper.bl.MineSweeperField;
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean initialised = false;
     private TextView tvMineCount;
     private ImageButton ibReset;
+    private TextView tvTimer;
+    private Timer timer;
+    private AtomicInteger atomicSeconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         gridLayout = findViewById(R.id.glButtons);
         tvMineCount = findViewById(R.id.tvMineCount);
         ibReset = findViewById(R.id.ibReset);
+        tvTimer = findViewById(R.id.tvTimer);
+
+        atomicSeconds = new AtomicInteger(0);
 
 //        FrameLayout.LayoutParams llLP = (FrameLayout.LayoutParams)gridLayout.getLayoutParams();
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -68,6 +77,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialise(Integer[] position){
         gameLogic = new GameLogic(position, FIELD_SIZE);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                int totalSeconds = atomicSeconds.incrementAndGet();
+                int seconds = totalSeconds % 60;
+                int minutes = totalSeconds / 60;
+                String text = String.format("%02d:%02d", minutes, seconds);
+                runOnUiThread(() -> tvTimer.setText(text));
+            }
+        }, 0, 1000);
+
         tvMineCount.setText(Integer.toString(GameLogic.NO_MINES - gameLogic.getNoTaggedMines()));
     }
 
@@ -80,6 +101,12 @@ public class MainActivity extends AppCompatActivity {
             initialised = true;
         }
         int result = gameLogic.makeMove(pos, true);
+        if(result == -4){
+//            buttons[pos[0]][pos[1]].setText(Integer.toString(gameLogic.getNoMines(pos)));
+//            buttons[pos[0]][pos[1]].setBackgroundColor(getResources().getColor(R.color.tagged, null));
+            win();
+            return true;
+        }
         if(result == -2){ // TODO: set flag instead of background
             buttons[pos[0]][pos[1]].setBackgroundColor(getResources().getColor(R.color.tagged, null));
         }else{
@@ -89,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+    private void resetTimer(){
+        timer.cancel();
+        atomicSeconds.set(0);
+    }
+
 
     private void onClickButton(View view){
         int[] pos = getClickedButton(view);
@@ -133,7 +165,8 @@ public class MainActivity extends AppCompatActivity {
                 buttons[i][j].setBackgroundColor(getResources().getColor(R.color.button, null));
                 buttons[i][j].setEnabled(true);
                 tvMineCount.setText(Integer.toString(GameLogic.NO_MINES));
-                // TODO: 06.02.2020 reset timer
+                tvTimer.setText("00:00");
+                resetTimer();
             }
         }
     }
@@ -151,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void lose(){
+        resetTimer();
         for (int i = 0; i < FIELD_SIZE; i++) {
             for (int j = 0; j < FIELD_SIZE; j++) {
                 MineSweeperField field = gameLogic.getMineSweeperField(new int[]{i,j});
@@ -183,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void win(){
+        resetTimer();
         // show mines
         for (int i = 0; i < FIELD_SIZE; i++) {
             for (int j = 0; j < FIELD_SIZE; j++) {

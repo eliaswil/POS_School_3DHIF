@@ -9,6 +9,7 @@ public class GameLogic {
     private MineSweeperField[][] mineSweeperFields;
     private List<Integer[]> revealedFields = new ArrayList<>();
     private int noTaggedMines;
+    private int noCorrectlyTaggedMines;
     private int fieldSize;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -94,10 +95,19 @@ public class GameLogic {
             if(mineSweeperFields[pos[0]][pos[1]].isTagged()){
                 this.noTaggedMines--;
                 mineSweeperFields[pos[0]][pos[1]].setTagged(false);
+                if(mineSweeperFields[pos[0]][pos[1]].isMine()){
+                    this.noCorrectlyTaggedMines--;
+                }
                 return -3;
             }else{
                 this.noTaggedMines++;
                 mineSweeperFields[pos[0]][pos[1]].setTagged(true);
+                if(mineSweeperFields[pos[0]][pos[1]].isMine()){
+                    this.noCorrectlyTaggedMines++;
+                    if(this.noCorrectlyTaggedMines == NO_MINES){
+                        return -4;
+                    }
+                }
                 return -2;
             }
         }
@@ -140,6 +150,7 @@ public class GameLogic {
 
     public GameLogic(Integer[] firstPosition, int fieldSize) {
         this.noTaggedMines = 0;
+        this.noCorrectlyTaggedMines = 0;
         this.fieldSize = fieldSize;
         placeMines(firstPosition);
         remainingEmptyFields = fieldSize*fieldSize - NO_MINES;
