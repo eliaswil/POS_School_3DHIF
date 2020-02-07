@@ -43,20 +43,20 @@ public class MainActivity extends AppCompatActivity {
 
         atomicSeconds = new AtomicInteger(0);
 
-//        FrameLayout.LayoutParams llLP = (FrameLayout.LayoutParams)gridLayout.getLayoutParams();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-
+        // create buttons dynamically
         for (int i = 0; i < FIELD_SIZE; i++) {
             for (int j = 0; j < FIELD_SIZE; j++) {
                 Button bt = new Button(this);
                 buttons[i][j] = bt;
+
                 bt.setId(i*10 + j);
                 bt.setTextColor(getResources().getColor(R.color.white, null));
                 bt.setBackgroundColor(getResources().getColor(R.color.button, null));
+
                 gridLayout.addView(bt);
                 ViewGroup.LayoutParams params = bt.getLayoutParams();
                 GridLayout.LayoutParams lp = (GridLayout.LayoutParams) bt.getLayoutParams();
@@ -66,14 +66,17 @@ public class MainActivity extends AppCompatActivity {
                 params.width = width / FIELD_SIZE - 2*margin;
                 params.height = width / FIELD_SIZE;
 
+                // set listener
                 bt.setOnClickListener(this::onClickButton);
                 bt.setOnLongClickListener(this::onLongClickButton);
             }
         }
 
+        // listener for the reset button
         ibReset.setOnClickListener(this::onReset);
 
     }
+
 
     private void initialise(Integer[] position){
         gameLogic = new GameLogic(position, FIELD_SIZE);
@@ -91,49 +94,77 @@ public class MainActivity extends AppCompatActivity {
 
         tvMineCount.setText(Integer.toString(GameLogic.NO_MINES - gameLogic.getNoTaggedMines()));
     }
-
-    private boolean onLongClickButton(View view){
-        int[] pos = getClickedButton(view);
-
-        if (!initialised) {
-            Integer[] position = {pos[0], pos[1]};
-            initialise(position);
-            initialised = true;
-        }
-        int result = gameLogic.makeMove(pos, true);
-        if(result == -4){
-//            buttons[pos[0]][pos[1]].setText(Integer.toString(gameLogic.getNoMines(pos)));
-//            buttons[pos[0]][pos[1]].setBackgroundColor(getResources().getColor(R.color.tagged, null));
-            win();
-            return true;
-        }
-        if(result == -2){ // TODO: set flag instead of background
-            buttons[pos[0]][pos[1]].setBackgroundColor(getResources().getColor(R.color.tagged, null));
-        }else{
-            buttons[pos[0]][pos[1]].setBackgroundColor(getResources().getColor(R.color.button, null));
-        }
-        tvMineCount.setText(Integer.toString(GameLogic.NO_MINES - gameLogic.getNoTaggedMines()));
-
-        return true;
-    }
     private void resetTimer(){
         timer.cancel();
         atomicSeconds.set(0);
     }
+    private void onReset(View view){
+        initialised = false;
+        for (int i = 0; i < FIELD_SIZE; i++) {
+            for (int j = 0; j < FIELD_SIZE; j++) {
+                buttons[i][j].setText("");
+                buttons[i][j].setBackgroundColor(getResources().getColor(R.color.button, null));
+                buttons[i][j].setEnabled(true);
+                tvMineCount.setText(Integer.toString(GameLogic.NO_MINES));
+                tvTimer.setText("00:00");
+                resetTimer();
+            }
+        }
+    }
 
 
-    private void onClickButton(View view){
+    private boolean onLongClickButton(View view){
         int[] pos = getClickedButton(view);
+
+        // initialise
         if (!initialised) {
             Integer[] position = {pos[0], pos[1]};
             initialise(position);
             initialised = true;
         }
-        int result = gameLogic.makeMove(pos, false);
-        if(result == -4){
+
+        // make the actual move
+        int result = gameLogic.tagField(pos);
+
+        // if won
+        if(result == 0){
+            win();
+        }
+
+        // if tagged now
+        else if(result == 1){
+            buttons[pos[0]][pos[1]].setBackground(getDrawable(R.drawable.flag2));
+        }
+
+        // if untagged now
+        else{
+            buttons[pos[0]][pos[1]].setBackgroundColor(getResources().getColor(R.color.button, null));
+        }
+
+        tvMineCount.setText(Integer.toString(GameLogic.NO_MINES - gameLogic.getNoTaggedMines()));
+        return true;
+    }
+
+    private void onClickButton(View view){
+        int[] pos = getClickedButton(view);
+
+        // initialise
+        if (!initialised) {
+            Integer[] position = {pos[0], pos[1]};
+            initialise(position);
+            initialised = true;
+        }
+
+        // make the actual move
+        int result = gameLogic.makeMove(pos);
+
+        // if won
+        if(result == -2){
             buttons[pos[0]][pos[1]].setText(Integer.toString(gameLogic.getNoMines(pos)));
             win();
         }
+
+        // if clicked on normal field (no mine)
         else if(result != -1){
             gameLogic.getRevealedFields().forEach(revealedPos -> {
                 buttons[revealedPos[0]][revealedPos[1]].setBackgroundColor(getResources().getColor(R.color.grey, null));
@@ -147,35 +178,21 @@ public class MainActivity extends AppCompatActivity {
             if(gameLogic.getNoMines(pos) != 0){
                 text = Integer.toString(gameLogic.getNoMines(pos));
             }
-            buttons[pos[0]][pos[1]].setText(text); // set no neighbours
 
-        }else{
-            // if touched mine
+            buttons[pos[0]][pos[1]].setText(text); // set no neighbours
+        }
+
+        // if touched mine
+        else{
             lose();
         }
-
     }
 
-    private void onReset(View view){
-        initialised = false;
-        for (int i = 0; i < FIELD_SIZE; i++) {
-            for (int j = 0; j < FIELD_SIZE; j++) {
-                int[] pos = {i,j};
-                buttons[i][j].setText("");
-                buttons[i][j].setBackgroundColor(getResources().getColor(R.color.button, null));
-                buttons[i][j].setEnabled(true);
-                tvMineCount.setText(Integer.toString(GameLogic.NO_MINES));
-                tvTimer.setText("00:00");
-                resetTimer();
-            }
-        }
-    }
 
     private int[] getClickedButton(View view){
         for (int i = 0; i < FIELD_SIZE; i++) {
             for (int j = 0; j < FIELD_SIZE; j++) {
                 if(buttons[i][j].equals(view)){
-                    Integer[] position = {i,j};
                     return new int[]{i,j};
                 }
             }
@@ -191,14 +208,13 @@ public class MainActivity extends AppCompatActivity {
                 buttons[i][j].setEnabled(false);
                 if(field.isMine()){
                     if(field.isTagged()){
-                        buttons[i][j].setBackgroundColor(getResources().getColor(R.color.correctlyTagged, null));
+                        buttons[i][j].setBackground(getDrawable(R.drawable.correctly_tagged_mine));
                     }else{
                         if(field.isRevealed()){
-                            buttons[i][j].setBackgroundColor(getResources().getColor(R.color.clickedMine, null));
+                            buttons[i][j].setBackground(getDrawable(R.drawable.clicked_mine));
                         }else{
-                            buttons[i][j].setBackgroundColor(getResources().getColor(R.color.mine, null));
+                            buttons[i][j].setBackground(getDrawable(R.drawable.mine));
                         }
-
                     }
                 }else {
                     if(field.isRevealed()){
@@ -209,9 +225,7 @@ public class MainActivity extends AppCompatActivity {
                         }else{
                             buttons[i][j].setBackgroundColor(getResources().getColor(R.color.button, null));
                         }
-
                     }
-
                 }
             }
         }
@@ -224,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 MineSweeperField field = gameLogic.getMineSweeperField(new int[]{i,j});
                 buttons[i][j].setEnabled(false);
                 if(field.isMine()){
-                    buttons[i][j].setBackgroundColor(getResources().getColor(R.color.mine, null));
+                    buttons[i][j].setBackground(getDrawable(R.drawable.correctly_tagged_mine));
                 }else {
                     buttons[i][j].setBackgroundColor(getResources().getColor(R.color.grey, null));
                 }

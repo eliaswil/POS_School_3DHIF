@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class MineSweeperField { // one single field
-    protected List<Integer[]> neighbours;
-    protected List<Integer[]> neighboursingMines;
+    private List<Integer[]> neighbours;
+    private List<Integer[]> neighboursingMines;
     private boolean tagged;
     private boolean revealed;
     private boolean isMine;
