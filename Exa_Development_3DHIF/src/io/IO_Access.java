@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IO_Access {
     private List<Student> students = new ArrayList<>();
@@ -50,7 +51,7 @@ public class IO_Access {
         System.out.println("Hello");
         IO_Access ioa = new IO_Access();
         try {
-           // ioa.writeToFile();
+           ioa.writeToFile();
             ioa.readFile();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
