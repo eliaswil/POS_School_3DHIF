@@ -80,7 +80,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
                 .placeholder(R.drawable.testpic)
                 .into(holder.getIvPicture());   // braucht mit Placeholder etwas länger beim Laden
         String name = contact.getLastname() + ", " + contact.getFirstname();
-        holder.getTvName().setText(name);
     }
 
     @Override

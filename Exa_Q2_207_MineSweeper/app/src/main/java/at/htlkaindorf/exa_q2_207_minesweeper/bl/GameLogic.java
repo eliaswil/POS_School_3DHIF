@@ -10,7 +10,7 @@ public class GameLogic {
     private int noTaggedMines;
     private int noCorrectlyTaggedMines;
     private int fieldSize;
-    public static final int NO_MINES = 20;
+    public static final int NO_MINES = 10;
     private int remainingEmptyFields;
 
     public GameLogic(Integer[] firstPosition, int fieldSize) {

@@ -1,0 +1,204 @@
+// Input file containing all trips:
+// Each file contains one trip
+// File-format:
+// city - country - country_code - startDate - duration in days
+Picos - Brazil - BR - 11.5.2024 - 9
+Takub - Philippines - PH - 13.9.2022 - 1
+Ngudu - Tanzania - TZ - 17.11.2020 - 7
+Końskowola - Poland - PL - 12.2.2022 - 3
+Lieksa - Finland - FI - 1.8.2021 - 7
+Atap - Indonesia - ID - 23.10.2024 - 2
+Perstorp - Sweden - SE - 27.1.2021 - 5
+Pictou - Canada - CA - 24.3.2022 - 10
+Stockholm - Sweden - SE - 24.5.2020 - 4
+Guanajay - Cuba - CU - 1.3.2025 - 5
+Shiziqiao - China - CN - 6.2.2023 - 10
+Wrząsowice - Poland - PL - 9.7.2024 - 6
+La Roche-sur-Yon - France - FR - 7.1.2023 - 3
+Aūa - American Samoa - AS - 9.10.2023 - 10
+Tambaú - Brazil - BR - 24.7.2022 - 3
+Shiquanhe - China - CN - 11.5.2022 - 8
+Ubajami - Indonesia - ID - 18.12.2023 - 9
+Arendal - Norway - NO - 17.11.2020 - 8
+Bindang - Indonesia - ID - 28.10.2020 - 4
+Suvorov - Russia - RU - 14.4.2024 - 1
+Wujiaying - China - CN - 13.12.2024 - 10
+Sivers’k - Ukraine - UA - 30.9.2024 - 6
+Salaspils - Latvia - LV - 31.5.2020 - 6
+Jinshanwei - China - CN - 5.5.2023 - 9
+Gakovo - Serbia - RS - 12.12.2020 - 1
+Bakersfield - United States - US - 8.5.2021 - 2
+Banayoyo - Philippines - PH - 6.9.2022 - 2
+Bronx - United States - US - 19.10.2021 - 5
+Yafan - China - CN - 26.8.2023 - 1
+Choushui - China - CN - 17.6.2022 - 7
+Bigaan - Philippines - PH - 25.9.2025 - 7
+Valjevo - Serbia - RS - 11.7.2022 - 10
+Ciawi - Indonesia - ID - 15.11.2024 - 6
+Princeville - Canada - CA - 15.2.2023 - 1
+Tanout - Niger - NE - 30.9.2023 - 6
+Xin’e - China - CN - 14.5.2020 - 4
+Helixi - China - CN - 5.5.2022 - 2
+Florida - Colombia - CO - 11.2.2025 - 2
+Kostel - Slovenia - SI - 20.6.2024 - 3
+Świlcza - Poland - PL - 18.5.2022 - 7
+Marseille - France - FR - 24.9.2024 - 7
+Ånge - Sweden - SE - 18.8.2022 - 2
+Hucun - China - CN - 10.10.2021 - 5
+Douliu - Taiwan - TW - 3.2.2020 - 5
+Samal - Philippines - PH - 6.8.2025 - 8
+Norfolk - United States - US - 10.11.2022 - 3
+Sumberingin Kulon - Indonesia - ID - 28.8.2023 - 8
+Roermond - Netherlands - NL - 4.1.2021 - 1
+Ingenio La Esperanza - Argentina - AR - 24.7.2022 - 1
+Porto Alegre - Brazil - BR - 16.2.2024 - 4
+Tukuyu - Tanzania - TZ - 30.10.2023 - 7
+Gubu - China - CN - 3.2.2021 - 1
+La Seyne-sur-Mer - France - FR - 13.3.2023 - 4
+Trbovlje - Slovenia - SI - 11.8.2023 - 2
+Tatarka - Russia - RU - 7.8.2023 - 6
+Halat - Indonesia - ID - 21.10.2024 - 8
+La Virgen - Mexico - MX - 12.6.2022 - 6
+Sandy Bay - Jamaica - JM - 10.11.2023 - 3
+Youlongchuan - China - CN - 9.11.2024 - 9
+Shijie - China - CN - 19.2.2023 - 8
+Youludu Sibage - China - CN - 29.5.2023 - 4
+Daet - Philippines - PH - 5.6.2021 - 8
+‘Afak - Iraq - IQ - 25.9.2022 - 5
+Mthatha - South Africa - ZA - 7.4.2024 - 7
+Tianjin - China - CN - 23.4.2025 - 8
+Ulundi - South Africa - ZA - 11.11.2023 - 10
+Rentian - China - CN - 14.2.2025 - 5
+Ciorescu - Moldova - MD - 5.2.2020 - 3
+Itabaiana - Brazil - BR - 8.4.2020 - 6
+Banjar Geriana Kangin - Indonesia - ID - 17.10.2025 - 1
+Santa Cruz La Laguna - Guatemala - GT - 22.8.2022 - 1
+Sakado - Japan - JP - 7.11.2023 - 5
+Inabaan Sur - Philippines - PH - 23.7.2025 - 2
+Piquete - Brazil - BR - 20.8.2024 - 8
+Seleuš - Serbia - RS - 18.11.2020 - 9
+Xinminxiang - China - CN - 29.1.2022 - 9
+Puńsk - Poland - PL - 20.10.2023 - 2
+Orlando - United States - US - 9.6.2023 - 6
+Seres - Philippines - PH - 5.3.2022 - 10
+Wŏnsan - North Korea - KP - 4.8.2025 - 1
+San Fernando del Valle de Catamarca - Argentina - AR - 5.4.2021 - 3
+Banjar Brahmanabukit - Indonesia - ID - 4.4.2020 - 7
+Wangshi - China - CN - 12.8.2022 - 1
+Teberda - Russia - RU - 1.2.2023 - 6
+Sande São Lourenço - Portugal - PT - 28.10.2024 - 4
+Ulster Spring - Jamaica - JM - 20.11.2023 - 7
+Belsh - Albania - AL - 28.9.2021 - 8
+Rūjayb - Palestinian Territory - PS - 2.5.2024 - 5
+Velyki Mezhyrichi - Ukraine - UA - 19.2.2021 - 6
+Svetlograd - Russia - RU - 15.6.2024 - 4
+Patabog - Philippines - PH - 13.9.2025 - 5
+San Luis Jilotepeque - Guatemala - GT - 31.7.2021 - 9
+Kampot - Cambodia - KH - 14.8.2021 - 3
+Souto - Portugal - PT - 28.9.2021 - 9
+Zbytków - Poland - PL - 6.3.2020 - 6
+Geshan - China - CN - 30.10.2023 - 5
+Tuquan - China - CN - 25.12.2020 - 6
+Kasamatsuchō - Japan - JP - 12.4.2025 - 8
+Bangjun - China - CN - 28.5.2020 - 1
+Francisco Villa - Mexico - MX - 4.3.2025 - 9
+Cigaleuh Kulon - Indonesia - ID - 20.5.2023 - 1
+Wucheng - China - CN - 28.10.2025 - 2
+Jiangwakou - China - CN - 27.6.2021 - 5
+Benito Juarez - Mexico - MX - 5.1.2022 - 10
+San Pedro Pinula - Guatemala - GT - 22.8.2022 - 9
+Witzenhausen - Germany - DE - 14.4.2025 - 7
+Raszków - Poland - PL - 3.12.2021 - 2
+Anshan - China - CN - 21.12.2025 - 3
+Hanbin - China - CN - 25.8.2020 - 3
+Laohekou - China - CN - 3.12.2021 - 5
+Louiseville - Canada - CA - 25.9.2023 - 7
+Slobodnica - Croatia - HR - 15.6.2022 - 5
+Wuxi - China - CN - 23.12.2021 - 4
+Kilju - North Korea - KP - 6.4.2022 - 7
+Khenifra - Morocco - MA - 5.4.2024 - 7
+Sacramento - United States - US - 9.1.2021 - 1
+Empório - Greece - GR - 20.5.2020 - 6
+Perístasi - Greece - GR - 26.8.2020 - 4
+Tyresö - Sweden - SE - 8.7.2021 - 3
+Cikai - China - CN - 11.4.2022 - 4
+Yufa - China - CN - 2.6.2022 - 7
+Nicosia - Cyprus - CY - 5.6.2024 - 3
+Chatuchak - Thailand - TH - 30.6.2025 - 4
+Pôrto Barra do Ivinheima - Brazil - BR - 2.8.2021 - 1
+Warsaw - Poland - PL - 29.7.2021 - 1
+Sancha - China - CN - 14.8.2020 - 6
+Nacimiento - Chile - CL - 25.1.2021 - 6
+Nandulehe - China - CN - 10.7.2023 - 1
+Kista - Sweden - SE - 10.6.2022 - 4
+Varniai - Lithuania - LT - 29.9.2020 - 3
+Norrköping - Sweden - SE - 31.12.2024 - 1
+Vinces - Ecuador - EC - 21.10.2025 - 2
+Baiima - Sierra Leone - SL - 20.3.2023 - 2
+Öldziyt - Mongolia - MN - 17.2.2020 - 6
+Nangkasari - Indonesia - ID - 11.2.2024 - 9
+Siteía - Greece - GR - 9.1.2024 - 7
+Asaita - Ethiopia - ET - 22.9.2024 - 3
+Lions Bay - Canada - CA - 1.9.2025 - 3
+Tanjungbahagia - Indonesia - ID - 8.11.2021 - 3
+Kālia - Bangladesh - BD - 24.10.2024 - 9
+Mapulo - Philippines - PH - 29.9.2025 - 9
+Katumba - Tanzania - TZ - 24.3.2021 - 6
+Tizguine - Morocco - MA - 4.4.2023 - 7
+Danao - Philippines - PH - 30.6.2020 - 1
+Valdemārpils - Latvia - LV - 27.12.2022 - 7
+Ciawi - Indonesia - ID - 26.3.2025 - 10
+Yigo Village - Guam - GU - 21.11.2022 - 4
+Zhangqing - China - CN - 18.4.2025 - 8
+Iralaya - Honduras - HN - 17.6.2022 - 2
+Cortiços - Portugal - PT - 11.9.2025 - 7
+Parabcan - Philippines - PH - 12.9.2023 - 10
+Castro Barros - Argentina - AR - 11.10.2021 - 6
+Pinyug - Russia - RU - 27.3.2020 - 9
+Steinkjer - Norway - NO - 25.6.2025 - 3
+Gävle - Sweden - SE - 16.4.2020 - 3
+Mercedes - Philippines - PH - 13.2.2022 - 1
+Shiqiaotou - China - CN - 6.8.2023 - 6
+Paris 09 - France - FR - 29.3.2025 - 4
+Niamtougou - Togo - TG - 6.3.2024 - 6
+Dukuhtengah - Indonesia - ID - 13.2.2022 - 8
+Aconibe - Equatorial Guinea - GQ - 17.5.2020 - 6
+Linshanhe - China - CN - 11.11.2023 - 3
+Vitarte - Peru - PE - 9.8.2020 - 5
+Minante Segundo - Philippines - PH - 1.6.2023 - 10
+Almalaguês - Portugal - PT - 30.10.2021 - 2
+Klatakan - Indonesia - ID - 10.6.2021 - 1
+Barreirinhas - Brazil - BR - 25.2.2021 - 7
+Kuantan - Malaysia - MY - 16.10.2022 - 8
+Hartswater - South Africa - ZA - 23.1.2021 - 6
+Can-asujan - Philippines - PH - 20.8.2025 - 6
+Viana - Brazil - BR - 20.10.2023 - 7
+Sanxi - China - CN - 5.2.2024 - 6
+Barnaul - Russia - RU - 12.7.2020 - 1
+Huelkail - Indonesia - ID - 1.11.2022 - 4
+Nanmo - China - CN - 28.11.2021 - 5
+Yaozhanzi - China - CN - 22.12.2022 - 4
+Schiedam postbusnummers - Netherlands - NL - 15.11.2025 - 1
+Xiaoshiqiao - China - CN - 4.11.2022 - 4
+Gąbin - Poland - PL - 14.3.2020 - 5
+Tongzilin - China - CN - 17.5.2021 - 5
+Aubergenville - France - FR - 17.3.2020 - 6
+Union - Philippines - PH - 5.8.2025 - 1
+Ngembel - Indonesia - ID - 29.11.2025 - 9
+Riachos - Portugal - PT - 19.2.2021 - 1
+Aeka - Indonesia - ID - 26.1.2021 - 5
+Morcellemont Saint André - Mauritius - MU - 9.8.2021 - 2
+Campinas - Brazil - BR - 31.10.2025 - 5
+Horní Lideč - Czech Republic - CZ - 18.4.2020 - 7
+Sande São Martinho - Portugal - PT - 12.6.2023 - 2
+Arani - Bolivia - BO - 7.1.2025 - 6
+Tsivil’sk - Russia - RU - 18.4.2025 - 10
+Amiens - France - FR - 30.10.2024 - 3
+Kurnia - Indonesia - ID - 27.11.2024 - 5
+Stari Grad - Croatia - HR - 24.12.2020 - 10
+Al Wardānīn - Tunisia - TN - 5.12.2023 - 6
+Satinka - Russia - RU - 3.8.2021 - 9
+Mpumalanga - South Africa - ZA - 10.10.2020 - 3
+Hengxizhen - China - CN - 5.12.2024 - 4
+Ransang - Philippines - PH - 23.1.2025 - 1
+Benito Juarez - Mexico - MX - 18.11.2023 - 4

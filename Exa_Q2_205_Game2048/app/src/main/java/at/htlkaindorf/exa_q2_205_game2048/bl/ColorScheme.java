@@ -14,6 +14,9 @@ public enum ColorScheme {
     C1024(1024, 0xffedaf1c, 0xffffffff),
     C2048(2048, 0xffedaf1c, 0xffffffff);
 
+    private int value;
+    private int backgroundColor;
+    private int fontColor;
 
     ColorScheme(int value, int backgroundColor, int fontColor){
         this.value = value;
@@ -21,9 +24,6 @@ public enum ColorScheme {
         this.fontColor = fontColor;
     }
 
-    private int value;
-    private int backgroundColor;
-    private int fontColor;
 
     public int getValue() {
         return value;
