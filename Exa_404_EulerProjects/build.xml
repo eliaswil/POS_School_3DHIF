@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Exa_Q4_Kontoverwaltung" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Exa_Q4_Kontoverwaltung.</description>
+<project name="Exa_404_EulerProjects" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Exa_404_EulerProjects.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -58,7 +58,7 @@
 
     An example of overriding the target for project execution could look like this:
 
-        <target name="run" depends="Exa_Q4_Kontoverwaltung-impl.jar">
+        <target name="run" depends="Exa_404_EulerProjects-impl.jar">
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>
