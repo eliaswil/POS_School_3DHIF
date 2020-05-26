@@ -15,4 +15,4 @@ FROM books
  INNER JOIN genres ON genres.genre_id = bg.genre_id
  INNER JOIN publishers pu ON pu.publisher_id = books.publisher_id
  
-WHERE books.title = 'SCJP Sun Certified Programmer for Java 6 Study Guide';
+WHERE books.title = '{bookTitle}';

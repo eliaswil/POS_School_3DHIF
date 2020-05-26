@@ -7,9 +7,4 @@ FROM genres
  RIGHT OUTER JOIN authors ON ba.author_id = authors.author_id
  LEFT OUTER JOIN publishers pu ON pu.publisher_id = books.publisher_id
 WHERE ('{genre}' = '' OR '{genre}' = genres.genre) 
- AND UPPER(books.title) LIKE UPPER('%{searchStringBookTitle}%')
- AND (UPPER(authors.last_name || ' ' || authors.first_name) LIKE UPPER('%{searchStringAuthor}%')
-	  OR UPPER(authors.first_name 
-			   || COALESCE(' ' || authors.middle_name, '') 
-			   || COALESCE(' ' || authors.last_name, '')) LIKE UPPER('%{searchStringAuthor}%'))
 ORDER BY pu.name;
