@@ -14,7 +14,14 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -47,10 +54,11 @@ public class EmployeeGUI extends JFrame{
     private JTable taEmployees;
     private EmployeeModel em = new EmployeeModel();
 
-    public EmployeeGUI(String title) throws HeadlessException {
+    public EmployeeGUI(String title) throws HeadlessException, FileNotFoundException, SQLException {
         super(title);
         dba = DB_Access.getInstance();
         initComponents();
+        fillComponentsWithData();
     }
     
     
@@ -74,6 +82,9 @@ public class EmployeeGUI extends JFrame{
                     tfBirthDate = new JTextField();
                     cbMale = new JCheckBox("Male");
                     cbFemale = new JCheckBox("Female");
+                    
+                    cbMale.setSelected(true);
+                    cbFemale.setSelected(true);
                     
                     cbDepartment.addActionListener(this::onSelectDepartment);
                     cbBirthDateBefore.addActionListener(this::onCheckBirthDate);
@@ -125,6 +136,7 @@ public class EmployeeGUI extends JFrame{
                     
                     taEmployees = new JTable(em);
                     taEmployees.getSelectionModel().addListSelectionListener(this::onSelectRow);
+                    taEmployees.setAutoCreateRowSorter(true); // automatically sort table by column
                     
                 spTable.setViewportView(taEmployees);
                 spTable.getViewport().addChangeListener(this::onScroll);
@@ -146,6 +158,13 @@ public class EmployeeGUI extends JFrame{
         
     }
     
+    private void fillComponentsWithData() throws FileNotFoundException, SQLException{
+        cbmDepartment.removeAllElements();
+        cbmDepartment.addAll(dba.getDepartments());
+        if(cbmDepartment.getSize() > 0){
+            cbDepartment.setSelectedIndex(0);
+        }
+    }
     
     public void onExit(){
         try {
@@ -157,7 +176,44 @@ public class EmployeeGUI extends JFrame{
     }
     
     public void onSelectDepartment(ActionEvent e){
-        throw new UnsupportedOperationException("TODO: onSelectDepartment");
+        // set Management
+        String department = cbDepartment.getSelectedItem().toString();
+        String htmlString = "<html><body style=\"padding: 10px;\">";
+        try {
+            htmlString = dba.getManagersFromDepartment(department)
+                    .stream().map((manager) -> manager.toString() + "\n")
+                    .reduce(htmlString, String::concat);
+        } catch (FileNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
+        htmlString += "</body></html>";
+        
+        lbManagement.setText(htmlString);
+        setEmployees();
+        
+        
+    }
+    
+    private void setEmployees(){
+        String department = cbDepartment.getSelectedItem().toString();
+        LocalDate birth_date_before = LocalDate.parse("0000-01-01", DateTimeFormatter.ISO_DATE);
+        if(cbBirthDateBefore.isSelected()){
+            if(!tfBirthDate.getText().isBlank()){
+                try{
+                    birth_date_before = LocalDate.parse(tfBirthDate.getText(), DateTimeFormatter.ISO_DATE);
+                }catch(DateTimeParseException ex){
+                    System.out.println(">>> Wrong Date Format: onSelectDepartment()");
+                }
+            }  
+        }
+        
+        try {
+            // set Employees - TODO
+            em.setEmployeesForDepartment(dba.getEmployeesFromDepartment(department, birth_date_before, cbMale.isSelected(), cbFemale.isSelected()));
+            em.fireTableDataChanged();
+        } catch (FileNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void onCheckBirthDate(ActionEvent e){
@@ -169,7 +225,7 @@ public class EmployeeGUI extends JFrame{
     }
     
     public void onChangeGenderSelection(ActionEvent e){
-        throw new UnsupportedOperationException("TODO: onChangeGenderSelection");
+        setEmployees();
     }
     
     public void onScroll(ChangeEvent e){
@@ -183,8 +239,12 @@ public class EmployeeGUI extends JFrame{
     
     
     public static void main(String[] args) {
-        EmployeeGUI employeeGUI = new EmployeeGUI("EmployeeDB");
-        employeeGUI.setVisible(true);
+        try {
+            EmployeeGUI employeeGUI = new EmployeeGUI("EmployeeDB");
+            employeeGUI.setVisible(true);
+        } catch (HeadlessException | FileNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     
 }
