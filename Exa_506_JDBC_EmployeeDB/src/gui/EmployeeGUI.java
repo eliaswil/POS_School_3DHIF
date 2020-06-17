@@ -5,6 +5,7 @@
  */
 package gui;
 
+import beans.Employee;
 import bl.EmployeeModel;
 import database.DB_Access;
 import java.awt.BorderLayout;
@@ -27,6 +28,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -52,7 +54,7 @@ public class EmployeeGUI extends JFrame{
     private JTextField tfBirthDate;
     private JLabel lbManagement;
     private JTable taEmployees;
-    private EmployeeModel em = new EmployeeModel();
+    private EmployeeModel em = new EmployeeModel(this);
 
     public EmployeeGUI(String title) throws HeadlessException, FileNotFoundException, SQLException {
         super(title);
@@ -152,10 +154,7 @@ public class EmployeeGUI extends JFrame{
             public void windowClosing(WindowEvent e) {
                 onExit();
             }
-        });
-            
-        
-        
+        });   
     }
     
     private void fillComponentsWithData() throws FileNotFoundException, SQLException{
@@ -196,13 +195,14 @@ public class EmployeeGUI extends JFrame{
     
     private void setEmployees(){
         String department = cbDepartment.getSelectedItem().toString();
-        LocalDate birth_date_before = LocalDate.parse("0000-01-01", DateTimeFormatter.ISO_DATE);
+        LocalDate birth_date_before = LocalDate.now();
         if(cbBirthDateBefore.isSelected()){
             if(!tfBirthDate.getText().isBlank()){
                 try{
-                    birth_date_before = LocalDate.parse(tfBirthDate.getText(), DateTimeFormatter.ISO_DATE);
+                    birth_date_before = LocalDate.parse(tfBirthDate.getText(), Employee.DTF);
                 }catch(DateTimeParseException ex){
-                    System.out.println(">>> Wrong Date Format: onSelectDepartment()");
+                    JOptionPane.showMessageDialog(this, "Wrong Date Format!\nPlease use: dd.MM.yyyy", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
             }  
         }
@@ -217,11 +217,13 @@ public class EmployeeGUI extends JFrame{
     }
     
     public void onCheckBirthDate(ActionEvent e){
-        throw new UnsupportedOperationException("TODO: onCheckBirthDate");
+        setEmployees();
     }
     
     public void onChangeBirthDate(DocumentEvent e){
-        throw new UnsupportedOperationException("TODO: onChangeBirthDate");
+        if(tfBirthDate.getText().length() >= 10 && cbBirthDateBefore.isSelected()){
+            setEmployees();
+        }
     }
     
     public void onChangeGenderSelection(ActionEvent e){
@@ -234,7 +236,7 @@ public class EmployeeGUI extends JFrame{
     }
     
     public void onSelectRow(ListSelectionEvent e){
-        throw new UnsupportedOperationException("TODO: onSelectRow");
+        System.out.println(">>> TODO: EmployeeGUI::onSelectRow");
     }
     
     
@@ -242,7 +244,7 @@ public class EmployeeGUI extends JFrame{
         try {
             EmployeeGUI employeeGUI = new EmployeeGUI("EmployeeDB");
             employeeGUI.setVisible(true);
-        } catch (HeadlessException | FileNotFoundException | SQLException ex) {
+        } catch (HeadlessException | FileNotFoundException | SQLException | DateTimeParseException ex) {
             ex.printStackTrace();
         }
     }
