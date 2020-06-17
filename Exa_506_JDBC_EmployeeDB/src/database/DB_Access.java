@@ -9,9 +9,7 @@ import beans.DeptManager;
 import beans.Employee;
 import io.IO_Access;
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.sql.Statement;
@@ -19,8 +17,6 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -61,7 +57,12 @@ public class DB_Access {
         System.out.println(">>> Disconnected booksdb.");
     }
     
-
+    /**
+     * Requests all available departments for the comboBox
+     * @return a list of all departments
+     * @throws FileNotFoundException
+     * @throws SQLException 
+     */
     public List<String> getDepartments() throws FileNotFoundException, SQLException{
         Statement statement = db.getStatement();
         String statementString = IO_Access.getSQLStatementString(Paths.get(GENERAL_PATH, "getDepartments.sql").toFile());
@@ -77,6 +78,13 @@ public class DB_Access {
         return departments;
     }
     
+    /**
+     * Requests all managers for a given department
+     * @param department
+     * @return a list of managers
+     * @throws FileNotFoundException
+     * @throws SQLException 
+     */
     public List<DeptManager> getManagersFromDepartment(String department) throws FileNotFoundException, SQLException{
         String sqlString = IO_Access.getSQLStatementString(Paths.get(GENERAL_PATH, "getManagerFromDepartment.sql").toFile());
         sqlString = sqlString.replaceAll("\\{dept_name\\}", department);
@@ -98,6 +106,16 @@ public class DB_Access {
         return managers;
     }
 
+    /**
+     * Requests all employees that match the filter criteria
+     * @param department
+     * @param birth_date_before
+     * @param male
+     * @param female
+     * @return a list of all employees
+     * @throws FileNotFoundException
+     * @throws SQLException 
+     */
     public List<Employee> getEmployeesFromDepartment(String department, LocalDate birth_date_before, boolean male, boolean female) 
             throws FileNotFoundException, SQLException{
         

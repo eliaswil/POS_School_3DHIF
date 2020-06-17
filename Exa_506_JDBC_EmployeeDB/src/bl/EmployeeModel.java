@@ -57,7 +57,12 @@ public class EmployeeModel extends AbstractTableModel{
     }
     
     
-
+    /**
+     * 
+     * @param arg0 row index
+     * @param arg1 column index
+     * @return 
+     */
     @Override
     public Object getValueAt(int arg0, int arg1) {
         Employee e = employees.get(arg0);
@@ -72,6 +77,13 @@ public class EmployeeModel extends AbstractTableModel{
         
     }
 
+    /**
+     * 
+     * @param aValue either name or hiredate
+     * @param rowIndex
+     * @param columnIndex
+     * @throws DateTimeParseException 
+     */
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) throws DateTimeParseException{
         switch(columnIndex){

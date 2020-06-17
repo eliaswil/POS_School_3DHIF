@@ -28,6 +28,9 @@ public class DeptManager {
         this.to_date = to_date;
     }
 
+    /**
+     * @return a pretty String for the html box
+     */
     @Override
     public String toString() {
         return String.format("<p style=\"margin-bottom: 4px;\">"
@@ -37,8 +40,6 @@ public class DeptManager {
                 + "</p>", this.last_name, this.first_name, this.from_date.format(DTF), 
                 this.to_date.isAfter(LocalDate.now()) ? "now" : this.to_date.format(DTF));
     }
-    
-    
 
     public String getLast_name() {
         return last_name;
@@ -108,6 +109,4 @@ public class DeptManager {
         }
         return true;
     }
-    
-    
 }

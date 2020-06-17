@@ -120,9 +120,5 @@ public class Employee {
 
     public void setHire_date(LocalDate hire_date) {
         this.hire_date = hire_date;
-    }
-    
-    
-    
-    
+    }   
 }

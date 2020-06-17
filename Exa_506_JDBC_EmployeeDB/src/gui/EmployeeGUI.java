@@ -18,11 +18,7 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -33,7 +29,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
@@ -63,7 +58,9 @@ public class EmployeeGUI extends JFrame{
         fillComponentsWithData();
     }
     
-    
+    /**
+     * initializes all Components
+     */
     private void initComponents(){
         this.setSize(1000, 600);
         this.setLocationRelativeTo(null);
@@ -157,6 +154,11 @@ public class EmployeeGUI extends JFrame{
         });   
     }
     
+    /**
+     * fills the combobox with data (Departments)
+     * @throws FileNotFoundException
+     * @throws SQLException 
+     */
     private void fillComponentsWithData() throws FileNotFoundException, SQLException{
         cbmDepartment.removeAllElements();
         cbmDepartment.addAll(dba.getDepartments());
@@ -164,7 +166,7 @@ public class EmployeeGUI extends JFrame{
             cbDepartment.setSelectedIndex(0);
         }
     }
-    
+
     public void onExit(){
         try {
             dba.disconnect();
@@ -174,6 +176,10 @@ public class EmployeeGUI extends JFrame{
         System.exit(0);
     }
     
+    /**
+     * handler for the combobox (selecting)
+     * @param e 
+     */
     public void onSelectDepartment(ActionEvent e){
         // set Management
         String department = cbDepartment.getSelectedItem().toString();
@@ -193,6 +199,10 @@ public class EmployeeGUI extends JFrame{
         
     }
     
+    /**
+     * whenever any filter criteria has changed this mehtod should be called,
+     * to update the employees in the table
+     */
     private void setEmployees(){
         String department = cbDepartment.getSelectedItem().toString();
         LocalDate birth_date_before = LocalDate.now();
@@ -216,10 +226,18 @@ public class EmployeeGUI extends JFrame{
         }
     }
     
+    /**
+     * handler for the checkbox 'Birthdate before'
+     * @param e 
+     */
     public void onCheckBirthDate(ActionEvent e){
         setEmployees();
     }
     
+    /**
+     * whenever the user changes the birthdate and the checkbox is selected --> update employees (table)
+     * @param e 
+     */
     public void onChangeBirthDate(DocumentEvent e){
         if(tfBirthDate.getText().length() >= 10 && cbBirthDateBefore.isSelected()){
             setEmployees();
