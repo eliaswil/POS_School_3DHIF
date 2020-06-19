@@ -9,4 +9,5 @@ FROM departments d
 WHERE d.dept_name = '{dept_name}'
     AND e.birth_date < TO_DATE('{birth_date}', 'YYYY-MM-DD')
     AND ((e.gender = 'M' AND '{gender_male}') OR (e.gender = 'F' AND '{gender_female}'))
-ORDER BY e.last_name, e.first_name;
+ORDER BY e.last_name, e.first_name
+LIMIT {limit};

@@ -116,14 +116,15 @@ public class DB_Access {
      * @throws FileNotFoundException
      * @throws SQLException 
      */
-    public List<Employee> getEmployeesFromDepartment(String department, LocalDate birth_date_before, boolean male, boolean female) 
+    public List<Employee> getEmployeesFromDepartment(String department, LocalDate birth_date_before, boolean male, boolean female, long limit) 
             throws FileNotFoundException, SQLException{
         
         String sqlString = IO_Access.getSQLStatementString(Paths.get(GENERAL_PATH, "getEmployeesFromDepartment.sql").toFile());
         sqlString = sqlString.replaceAll("\\{dept_name\\}", department)
                 .replaceAll("\\{birth_date\\}", birth_date_before.format(DateTimeFormatter.ISO_DATE))
                 .replaceAll("\\{gender_male\\}", Boolean.toString(male))
-                .replaceAll("\\{gender_female\\}", Boolean.toString(female));
+                .replaceAll("\\{gender_female\\}", Boolean.toString(female))
+                .replaceAll("\\{limit\\}", Long.toString(limit));
        
         Statement statement = db.getStatement();
         List<Employee> employees = new ArrayList<>();
@@ -149,7 +150,7 @@ public class DB_Access {
         try {
             System.out.println(dba.getDepartments().toString());
             System.out.println(dba.getManagersFromDepartment("Marketing").toString());
-            dba.getEmployeesFromDepartment("Marketing", LocalDate.MIN, true, true);
+            dba.getEmployeesFromDepartment("Marketing", LocalDate.MIN, true, true, Long.MAX_VALUE);
         } catch (FileNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }

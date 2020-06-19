@@ -13,6 +13,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -26,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -50,6 +53,10 @@ public class EmployeeGUI extends JFrame{
     private JLabel lbManagement;
     private JTable taEmployees;
     private EmployeeModel em = new EmployeeModel(this);
+    
+    private final long LIMIT_INCREASE = 900;
+    private long limit = LIMIT_INCREASE;
+    private boolean isFetching = false;
 
     public EmployeeGUI(String title) throws HeadlessException, FileNotFoundException, SQLException {
         super(title);
@@ -138,7 +145,7 @@ public class EmployeeGUI extends JFrame{
                     taEmployees.setAutoCreateRowSorter(true); // automatically sort table by column
                     
                 spTable.setViewportView(taEmployees);
-                spTable.getViewport().addChangeListener(this::onScroll);
+                spTable.getVerticalScrollBar().addAdjustmentListener(this::onScroll);
             
             paTableMain.add(spTable);
             
@@ -219,7 +226,7 @@ public class EmployeeGUI extends JFrame{
         
         try {
             // set Employees - TODO
-            em.setEmployeesForDepartment(dba.getEmployeesFromDepartment(department, birth_date_before, cbMale.isSelected(), cbFemale.isSelected()));
+            em.setEmployeesForDepartment(dba.getEmployeesFromDepartment(department, birth_date_before, cbMale.isSelected(), cbFemale.isSelected(), limit));
             em.fireTableDataChanged();
         } catch (FileNotFoundException | SQLException ex) {
             ex.printStackTrace();
@@ -248,9 +255,18 @@ public class EmployeeGUI extends JFrame{
         setEmployees();
     }
     
-    public void onScroll(ChangeEvent e){
-        System.out.println("TODO: onScroll, scroll, scroll, ..");
-//        throw new UnsupportedOperationException("TODO: onScroll");
+    public void onScroll(AdjustmentEvent e){
+        if (!e.getValueIsAdjusting()) {
+            JScrollBar scrollBar = (JScrollBar) e.getAdjustable();
+            int extent = scrollBar.getModel().getExtent();
+            int maximum = scrollBar.getModel().getMaximum();
+            if (extent + e.getValue() == maximum && !isFetching) {
+                isFetching = true;
+                limit += LIMIT_INCREASE;
+                setEmployees();
+                isFetching = false;
+            }
+        }
     }
     
     public void onSelectRow(ListSelectionEvent e){
