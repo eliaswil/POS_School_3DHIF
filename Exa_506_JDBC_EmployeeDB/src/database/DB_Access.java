@@ -112,7 +112,17 @@ public class DB_Access {
         return managers;
     }
 
-    
+    /**
+     * prepares the sql string
+     * @param department
+     * @param birth_date_before
+     * @param male
+     * @param female
+     * @param limit
+     * @param sortKeys
+     * @return
+     * @throws FileNotFoundException 
+     */
     public String prepareSqlStatement(String department, LocalDate birth_date_before, 
             boolean male, boolean female, long limit, List<SortKey> sortKeys) throws FileNotFoundException{
         

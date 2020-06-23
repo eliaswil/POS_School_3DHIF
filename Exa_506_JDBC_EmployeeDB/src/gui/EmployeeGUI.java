@@ -263,6 +263,10 @@ public class EmployeeGUI extends JFrame{
         setEmployees();
     }
     
+    /**
+     * handler for scrolling: reached end ? --> request next employees
+     * @param e 
+     */
     public void onScroll(AdjustmentEvent e){
         if (!e.getValueIsAdjusting()) {
             JScrollBar scrollBar = (JScrollBar) e.getAdjustable();
@@ -277,6 +281,10 @@ public class EmployeeGUI extends JFrame{
         }
     }
     
+    /**
+     * when the user clicks the column heading --> sort
+     * @param e 
+     */
     public void onSort(RowSorterEvent e){
         if(e.getType().equals(javax.swing.event.RowSorterEvent.Type.SORT_ORDER_CHANGED)){
             sortOrder = (List<SortKey>) taEmployees.getRowSorter().getSortKeys();
