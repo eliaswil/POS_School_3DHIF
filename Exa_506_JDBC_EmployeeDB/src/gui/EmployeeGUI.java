@@ -20,6 +20,8 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -31,10 +33,14 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
+import javax.swing.RowSorter.SortKey;
+import javax.swing.SortOrder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.RowSorterEvent;
 
 /**
  *
@@ -55,6 +61,7 @@ public class EmployeeGUI extends JFrame{
     private final long LIMIT_INCREASE = 900;
     private long limit = LIMIT_INCREASE;
     private boolean isFetching = false;
+    private List<SortKey> sortOrder = new ArrayList<>();
 
     public EmployeeGUI(String title) throws HeadlessException, FileNotFoundException, SQLException {
         super(title);
@@ -143,8 +150,8 @@ public class EmployeeGUI extends JFrame{
                 JScrollPane spTable = new JScrollPane();
                     
                     taEmployees = new JTable(em);
-                    taEmployees.getSelectionModel().addListSelectionListener(this::onSelectRow);
                     taEmployees.setAutoCreateRowSorter(true); // automatically sort table by column
+                    taEmployees.getRowSorter().addRowSorterListener(this::onSort);
                     
                 spTable.setViewportView(taEmployees);
                 spTable.getVerticalScrollBar().addAdjustmentListener(this::onScroll);
@@ -226,7 +233,8 @@ public class EmployeeGUI extends JFrame{
         
         try {
             // set Employees - TODO
-            em.setEmployeesForDepartment(dba.getEmployeesFromDepartment(department, birth_date_before, cbMale.isSelected(), cbFemale.isSelected(), limit));
+            em.setEmployeesForDepartment(dba.getEmployeesFromDepartment(department, birth_date_before, 
+                    cbMale.isSelected(), cbFemale.isSelected(), limit, sortOrder));
             em.fireTableDataChanged();
         } catch (FileNotFoundException | SQLException ex) {
             ex.printStackTrace();
@@ -269,8 +277,12 @@ public class EmployeeGUI extends JFrame{
         }
     }
     
-    public void onSelectRow(ListSelectionEvent e){
-        System.out.println(">>> TODO if motivation > 9000: EmployeeGUI::onSelectRow");
+    public void onSort(RowSorterEvent e){
+        if(e.getType().equals(javax.swing.event.RowSorterEvent.Type.SORT_ORDER_CHANGED)){
+            sortOrder = (List<SortKey>) taEmployees.getRowSorter().getSortKeys();
+            setEmployees();
+        }
+                
     }
     
     

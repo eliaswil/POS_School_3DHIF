@@ -90,7 +90,12 @@ public class EmployeeModel extends AbstractTableModel{
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) throws DateTimeParseException{
         boolean success = false;
-        Employee oldEmployee = employees.get(rowIndex);
+        Employee oldEmployee = null;
+        try {
+            oldEmployee = (Employee)employees.get(rowIndex).clone();
+        } catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();
+        }
         switch(columnIndex){
             case 0 -> {
                 String name = aValue.toString();
@@ -113,13 +118,14 @@ public class EmployeeModel extends AbstractTableModel{
             }
             default -> System.out.println(">>> Error: EmployeeModel::setValueAt, this message should never appear!");      
         }
+        
         if(success){
             try {
                 empGUI.getDB_Access().updateEmployee(employees.get(rowIndex), oldEmployee);
+                fireTableRowsUpdated(0, employees.size()-1);
                 employees.sort(Comparator.comparing(Employee::getLast_name)
                         .thenComparing(Employee::getFirst_name)
                         .thenComparing(Employee::getBirth_date));
-                this.fireTableDataChanged();
             } catch (FileNotFoundException | SQLException ex) {
                 ex.printStackTrace();
             }

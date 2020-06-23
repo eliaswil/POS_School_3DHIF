@@ -13,7 +13,7 @@ import java.util.Objects;
  *
  * @author Elias Wilfinger
  */
-public class Employee {
+public class Employee implements Cloneable{
     private String last_name;
     private String first_name;
     private char gender;
@@ -79,6 +79,13 @@ public class Employee {
         }
         return true;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
     
 

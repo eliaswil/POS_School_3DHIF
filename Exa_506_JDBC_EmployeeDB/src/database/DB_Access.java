@@ -19,6 +19,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.Date;
+import javax.swing.RowSorter;
+import javax.swing.RowSorter.SortKey;
+import javax.swing.SortOrder;
 
 /**
  *
@@ -109,18 +112,9 @@ public class DB_Access {
         return managers;
     }
 
-    /**
-     * Requests all employees that match the filter criteria
-     * @param department
-     * @param birth_date_before
-     * @param male
-     * @param female
-     * @return a list of all employees
-     * @throws FileNotFoundException
-     * @throws SQLException 
-     */
-    public List<Employee> getEmployeesFromDepartment(String department, LocalDate birth_date_before, boolean male, boolean female, long limit) 
-            throws FileNotFoundException, SQLException{
+    
+    public String prepareSqlStatement(String department, LocalDate birth_date_before, 
+            boolean male, boolean female, long limit, List<SortKey> sortKeys) throws FileNotFoundException{
         
         String sqlString = IO_Access.getSQLStatementString(Paths.get(GENERAL_PATH, "getEmployeesFromDepartment.sql").toFile());
         sqlString = sqlString.replaceAll("\\{dept_name\\}", department)
@@ -128,7 +122,35 @@ public class DB_Access {
                 .replaceAll("\\{gender_male\\}", Boolean.toString(male))
                 .replaceAll("\\{gender_female\\}", Boolean.toString(female))
                 .replaceAll("\\{limit\\}", Long.toString(limit));
-       
+        
+        List<String> columnNames = new ArrayList<>(List.of("(e.last_name, e.first_name)", "e.gender", "e.birth_date", "e.hire_date"));
+        String sortOrder = "ORDER BY";
+        sortOrder = sortKeys.stream().map((sortKey) -> " " + columnNames.get(sortKey.getColumn()) + " " 
+                + (sortKey.getSortOrder().equals(SortOrder.ASCENDING) ? "ASC" : "DESC") + ",").reduce(sortOrder, String::concat);
+        
+        sortOrder = sortOrder.replaceFirst(",$", "");
+        sortOrder = sortOrder.equals("ORDER BY") ? sortOrder + " (e.last_name, e.first_name) ASC" : sortOrder; // default, if not sorted
+        sqlString = sqlString.replaceFirst("ORDER BY", sortOrder);
+        return sqlString;
+    }
+    /**
+     * Requests all employees that match the filter criteria
+     * @param department
+     * @param birth_date_before
+     * @param male
+     * @param female
+     * @param limit
+     * @param sortOrder
+     * @return a list of all employees
+     * @throws FileNotFoundException
+     * @throws SQLException 
+     */
+    public List<Employee> getEmployeesFromDepartment(String department, LocalDate birth_date_before, 
+            boolean male, boolean female, long limit, List<RowSorter.SortKey> sortOrder) 
+            throws FileNotFoundException, SQLException{
+        
+        String sqlString = prepareSqlStatement(department, birth_date_before, male, female, limit, sortOrder);
+        
         Statement statement = db.getStatement();
         List<Employee> employees = new ArrayList<>();
         
@@ -176,7 +198,8 @@ public class DB_Access {
         try {
             System.out.println(dba.getDepartments().toString());
             System.out.println(dba.getManagersFromDepartment("Marketing").toString());
-            dba.getEmployeesFromDepartment("Marketing", LocalDate.MIN, true, true, Long.MAX_VALUE);
+            dba.getEmployeesFromDepartment("Marketing", LocalDate.MIN, 
+                    true, true, Long.MAX_VALUE, null);
         } catch (FileNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
