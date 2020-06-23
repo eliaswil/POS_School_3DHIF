@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.Date;
 
 /**
  *
@@ -28,6 +30,7 @@ public class DB_Access {
     private boolean isConnected = false;
     
     private static final String GENERAL_PATH = Paths.get(System.getProperty("user.dir"), "src", "res", "sql").toString();
+    PreparedStatement psUpdateEmployee = null;
     
     public static DB_Access getInstance() {
         if (theInstance == null) {
@@ -143,6 +146,29 @@ public class DB_Access {
         db.releaseStatement(statement);
         System.out.println(">>> Returning " + employees.size() + " employees.");
         return employees;
+    }
+    
+    /**
+     * Updates first_name, last_name and hire_date of an employee
+     * @param newEmployee
+     * @param oldEmployee
+     * @throws FileNotFoundException
+     * @throws SQLException 
+     */
+    public void updateEmployee(Employee newEmployee, Employee oldEmployee) throws FileNotFoundException, SQLException{
+        String sqlString = IO_Access.getSQLStatementString(Paths.get(GENERAL_PATH, "updateEmployee.sql").toFile());
+        sqlString = sqlString.replaceFirst("\\{old_first_name\\}", oldEmployee.getFirst_name())
+                .replaceFirst("\\{old_last_name\\}", oldEmployee.getLast_name())
+                .replaceFirst("\\{birth_date\\}", oldEmployee.getBirth_date().format(DateTimeFormatter.ISO_DATE));
+        
+        psUpdateEmployee = db.getConnection().prepareStatement(sqlString);
+        
+        psUpdateEmployee.setString(1, newEmployee.getFirst_name());
+        psUpdateEmployee.setString(2, newEmployee.getLast_name());
+        psUpdateEmployee.setDate(3, Date.valueOf(newEmployee.getHire_date()));
+        
+        psUpdateEmployee.executeUpdate();
+        System.out.println(">>> Updated 1 Employee.");
     }
     
     public static void main(String[] args) {

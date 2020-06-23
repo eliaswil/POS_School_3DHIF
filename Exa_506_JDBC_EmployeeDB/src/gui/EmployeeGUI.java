@@ -14,7 +14,6 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -33,7 +32,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -63,6 +61,10 @@ public class EmployeeGUI extends JFrame{
         dba = DB_Access.getInstance();
         initComponents();
         fillComponentsWithData();
+    }
+    
+    public DB_Access getDB_Access(){
+        return dba;
     }
     
     /**
@@ -202,8 +204,6 @@ public class EmployeeGUI extends JFrame{
         
         lbManagement.setText(htmlString);
         setEmployees();
-        
-        
     }
     
     /**
@@ -270,7 +270,7 @@ public class EmployeeGUI extends JFrame{
     }
     
     public void onSelectRow(ListSelectionEvent e){
-        System.out.println(">>> TODO: EmployeeGUI::onSelectRow");
+        System.out.println(">>> TODO if motivation > 9000: EmployeeGUI::onSelectRow");
     }
     
     

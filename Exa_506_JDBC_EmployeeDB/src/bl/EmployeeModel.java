@@ -6,13 +6,16 @@
 package bl;
 
 import beans.Employee;
-import database.DB_Access;
 import gui.EmployeeGUI;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -86,40 +89,45 @@ public class EmployeeModel extends AbstractTableModel{
      */
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) throws DateTimeParseException{
+        boolean success = false;
+        Employee oldEmployee = employees.get(rowIndex);
         switch(columnIndex){
-            case 0:
+            case 0 -> {
                 String name = aValue.toString();
                 String splitter = name.contains(",") ? name.contains(" ") ? ",[\\s]" : "," : "[\\s]";
                 employees.get(rowIndex).setLast_name(name.split(splitter)[0]);
                 employees.get(rowIndex).setFirst_name(name.split(splitter)[1]);
-                break;
-            case 3:
+                success = true;
+            }
+            case 3 -> {
                 String date = aValue.toString();
                 if(date != null && !date.isBlank()){
                     try{
                         LocalDate hiredate = LocalDate.parse(date, Employee.DTF);
                         employees.get(rowIndex).setHire_date(hiredate);  
+                        success = true;
                     }catch(DateTimeParseException ex){
                         JOptionPane.showMessageDialog(empGUI, "Wrong Date Format!\nPlease use: dd.MM.yyyy", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-                break;
-            default:
-                System.out.println(">>> Error: EmployeeModel::setValueAt, this message should never appear!");
-                
+            }
+            default -> System.out.println(">>> Error: EmployeeModel::setValueAt, this message should never appear!");      
         }
-        System.out.println(">>> TODO: setvalueat()");
+        if(success){
+            try {
+                empGUI.getDB_Access().updateEmployee(employees.get(rowIndex), oldEmployee);
+                employees.sort(Comparator.comparing(Employee::getLast_name)
+                        .thenComparing(Employee::getFirst_name)
+                        .thenComparing(Employee::getBirth_date));
+                this.fireTableDataChanged();
+            } catch (FileNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return (columnIndex == 0 || columnIndex == 3);
-    }
-    
-    
-    
-    
-    
-    
-    
+    }    
 }
