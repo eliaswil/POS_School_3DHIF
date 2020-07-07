@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Exa_104_FuelConsumption</string>
+    <string name="fuel_consumption">Fuel Consumption</string>
+    <string name="tv_fuel_in_liter">Fuel in liter:</string>
+    <string name="tv_distance_in_km">Distance in km:</string>
+    <string name="et_0_liter">0 liter</string>
+    <string name="et_distance_hint">0 km</string>
+    <string name="btCalculate_text">Calculate</string>
+    <string name="tvOutput_text_consumption">Consumption: %f l/km</string>
+    <string name="tvOutput_text_illegalInput">Illegal Input</string>
+    <string name="tvOutput_text_initialOutput">Consumption:</string>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Happiness-Indicator-App</string>
+    <string name="tvHeadingText">Happiness indicator</string>
+    <string name="tvHappinessText">Happiness:</string>
+    <string name="tvNameText">Name:</string>
+    <string name="etNameHint">Name</string>
+    <string name="btSendText">SEND</string>
+    <string name="enterName">Please enter name</string>
+</resources>

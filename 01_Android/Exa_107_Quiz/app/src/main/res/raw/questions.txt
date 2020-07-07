@@ -1,0 +1,20 @@
+# Category | Question | An;sw;e;rs | correctAnswer;
+
+TINF | Was wird im Code Bereich (im RAM) gespeichert? | lokale Variablen ; dynamisch erzeugte Datenstrukturen ; Maschinenbefehle ; Konstanten | 2
+TINF | Welchen Zustand bekommt ein Prozess, wenn zu wenig RAM zur Verfügung steht? | blockiert ; ausgelagert ; ausführend ; terminiert | 1
+TINF | Welche Unterbrechungen/Ereignisse sind nicht synchron? | Systemaufrufe ; Hardwarefehler ; Software-Interrupts ; Programmfehler (zb: Division-By-Zero) | 1
+TINF | Welcher Computer hatte erstmals eine Shell? | IBSYS ; Multics ; Xerox Alto ; Altair 8000 | 0
+TINF | Welches OS ist am meisten verbreitet? | Windows ; Linux ; iOS ; Android | 3
+
+
+NVS | Welche logische Topologie wird für die Speicherung von Daten verwendet ? | MAN ; SAN ; WAN ; LAN | 1
+NVS | Wie nennt man die Daten im OSI-Layer 2 | Packets ; Data ; Frames ; Segments | 2
+NVS | Was ist das erste (=nullte) Feld in einem IPv4-Paket | TTL ; Source-IP ; Protocol ; Version | 3
+NVS | Gib den richtigen Adressbereich der privaten Klasse-B IPv4-Adressen an. | 172.16.0.0/16 ;  10.0.0.0/8 ; 192.168.0.0/16 ; 172.16.0.0/12 | 3
+NVS | Welches Protokoll geht über UDP? | IMAP ; FTP ; SSH ; SNMP | 3
+
+POS | Welche Collections gibt es nicht ? | Set ; Array ; List ; Map | 1
+POS | Wie kann man die Höhe einer View definieren | layout_height="match_parent" ; android:layout_height="match_content" ; android:layout_height=10dp ; android:layout_height="match_parent" | 3
+POS | Welche Methode(n) müssen in der Datenklasse implementiert werden, damit die Klasse in Sets verwended werden darf? |  equals()  ; hashCode() ; equals() und hashMap() ; equals() und hashCode() | 3
+POS | Welches Layout gibt es in Android nicht ? | Scroll-Layout ; Table-Layout ; Grid-Layout ; Constraint-Layout | 0
+POS | Welche Map wird automatisch nach dem Key sortiert ? | HashMap ; TreeMap ; LinkedHashMap ; HashSet | 1

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tvCategoryText"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:id="@+id/trQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="6">
+
+            <TextView
+                android:id="@+id/tvQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:textColor="#000"
+                android:lines="5" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trAnswersUpper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="4">
+
+            <Button
+                android:id="@+id/btAnswer1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:lines="5"
+                android:padding="2.5dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btAnswer2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:lines="5"
+                android:padding="2.5dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trAnswersLower"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="4">
+
+            <Button
+                android:id="@+id/btAnswer3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:lines="5"
+                android:padding="2.5dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btAnswer4"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/dark_grey"
+                android:lines="5"
+                android:padding="2.5dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trState"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btQuestion1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
+
+            <Button
+                android:id="@+id/btQuestion2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
+
+            <Button
+                android:id="@+id/btQuestion3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
+
+            <Button
+                android:id="@+id/btQuestion4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
+
+            <Button
+                android:id="@+id/btQuestion5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/light_grey"
+                android:enabled="false"
+                android:onClick="onDisplayAnyQuestion" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trNext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0">
+
+            <Button
+                android:id="@+id/btContinue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#005CE0"
+                android:enabled="false"
+                android:text="@string/btContinueText" />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>

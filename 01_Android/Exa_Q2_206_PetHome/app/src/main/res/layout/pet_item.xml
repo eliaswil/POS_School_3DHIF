@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="#4AF9FF"
+    android:id="@+id/rlItem"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/ivPicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NameName"
+        android:id="@+id/tvName"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/ivPicture"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ivGender" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="23-01-2015"
+        android:id="@+id/tvBirthdate"
+        android:layout_below="@id/tvName"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/ivPicture"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Size: small"
+        android:id="@+id/tvSize"
+        android:layout_below="@id/tvBirthdate"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/ivPicture"
+        android:textSize="20sp"/>
+
+
+</RelativeLayout>

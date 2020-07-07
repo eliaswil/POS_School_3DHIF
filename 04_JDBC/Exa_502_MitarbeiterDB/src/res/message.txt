@@ -1,0 +1,22 @@
+-------------------------
+Welcome to MitarbeiterDB!
+-------------------------
+
+help    ...     display this help
+q       ...     quit/exit
+
+cd      ...     connect to database
+dd      ...     disconnect database
+
+md      ...     make/create database
+mt      ...     make/create table 
+rd      ...     remove/drop database
+rt      ...     remove/drop table
+
+e DEPARTMENT      ...     get employees per department
+
+s GENDER          ...     get avarage salary of gender
+
+ie      ...     insert employees from .csv
+
+re PERS_NR        ...     remove employee

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailedActivity"
+    android:paddingTop="50dp"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
+    android:paddingBottom="30dp"
+    android:background="@color/grey">
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ivProfilePic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:elevation="5dp"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ivProfilePic">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/firstname"
+                android:textColor="@color/orange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvFirstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="Elias"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/lastname"
+                android:textColor="@color/orange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvLastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="Wilfinger"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/language"
+                android:textColor="@color/orange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="German"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/gender"
+                android:textColor="@color/orange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="male"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/phone_number"
+                android:textColor="@color/orange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="+43 000 0000 0000"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+    </TableLayout>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/etInputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHeading"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="@string/etInputTextHint"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:lines="5"
+        android:layout_marginBottom="30dp"/>
+
+    <TextView
+        android:id="@+id/tvHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/tvHeading"
+        android:textColor="#FFA200"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvStyleText"
+        android:textSize="20sp"
+        android:layout_below="@+id/etInputText"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"/>
+
+    <CheckBox
+        android:id="@+id/cbStyleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cbBoldText"
+        android:layout_toEndOf="@id/tvStyle"
+        android:layout_below="@id/etInputText"
+        android:layout_marginEnd="30dp"/>
+
+    <CheckBox
+        android:id="@+id/cbStyleItalic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etInputText"
+        android:layout_toEndOf="@id/cbStyleBold"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="@string/cbItalicText" />
+
+    <TextView
+        android:id="@+id/tvSizeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvSizeLabel"
+        android:layout_below="@id/tvStyle"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/tvSizeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvSizeValue"
+        android:textSize="20sp"
+        android:layout_toEndOf="@+id/tvSizeLabel"
+        android:layout_below="@id/tvStyle" />
+
+    <TextView
+        android:id="@+id/tvFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@id/tvSizeLabel"
+        android:text="@string/tvFontText"
+        android:layout_marginEnd="30dp"/>
+
+    <SeekBar
+        android:id="@+id/sbSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvStyle"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/tvSizeValue"
+        android:layout_centerVertical="true"
+        android:max="36"
+        android:min="12"
+        android:progress="24"/>
+
+    <RadioGroup
+        android:id="@+id/rgFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvFont"
+        android:layout_below="@id/tvSizeLabel">
+
+        <RadioButton
+            android:id="@+id/rbUbuntu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rbUbuntuText"
+            />
+
+        <RadioButton
+            android:id="@+id/rbComicSans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/coming_soon"
+            android:text="@string/rbComicSansText" />
+
+        <RadioButton
+            android:id="@+id/rbRoboto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_mono_light"
+            android:text="@string/rbRobotoText" />
+    </RadioGroup>
+
+
+</RelativeLayout>

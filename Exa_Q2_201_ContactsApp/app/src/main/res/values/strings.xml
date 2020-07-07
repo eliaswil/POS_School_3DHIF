@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Exa_Q2_201_ContactsApp</string>
-    <string name="firstname">Firstname:</string>
-    <string name="lastname">Lastname:</string>
-    <string name="language">Language:</string>
-    <string name="gender">Gender:</string>
-    <string name="phone_number">Phone number:</string>
-</resources>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:stretchColumns="*"
+    android:background="#0891FF"
+    tools:context=".MainActivity">
+
+    <TableRow
+        android:id="@+id/trCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Kategorie: Sport"
+            android:textSize="20sp" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trQuestion"
+        android:layout_weight="6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:lines="5"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text=""
+            android:background="#FFFFFF"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trAnswersUpper"
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Answer1" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Button" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trAnsersLower"
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trState"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trNext"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Button" />
+    </TableRow>
+</TableLayout>
